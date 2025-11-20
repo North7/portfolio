@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aron Song | Product Architect</title>
+    <meta name="description" content="Aron Song - 產品架構師。11年經驗，專注於 Web3 金融科技與 AI 醫療領域的創新。">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', 'sans-serif'],
+                    },
+                    colors: {
+                        apple: {
+                            bg: '#000000',
+                            card: '#1c1c1e',
+                            cardHover: '#2c2c2e',
+                            text: '#f5f5f7',
+                            subtext: '#86868b',
+                            accent: '#2997ff',
+                            border: '#424245'
+                        }
+                    },
+                    animation: {
+                        'float': 'float 8s ease-in-out infinite',
+                        'float-delayed': 'float 8s ease-in-out 4s infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-15px)' },
+                        }
+                    },
+                    backgroundImage: {
+                        'grid-pattern': "linear-gradient(to right, #333 1px, transparent 1px), linear-gradient(to bottom, #333 1px, transparent 1px)",
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #000;
+            color: #f5f5f7;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Global Noise Texture for Premium Feel */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+
+        /* Text Gradient */
+        .text-gradient {
+            background: linear-gradient(135deg, #ffffff 0%, #86868b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-gradient-blue {
+            background: linear-gradient(135deg, #2997ff 0%, #007aff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .text-gradient-gold {
+            background: linear-gradient(135deg, #FFD700 0%, #FDB931 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Glassmorphism */
+        .glass-nav {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-card-light {
+            background: rgba(28, 28, 30, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* Animations */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .bento-card {
+            background-color: #1c1c1e;
+            border-radius: 30px;
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s ease;
+            transform: translateZ(0);
+        }
+
+        .bento-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            z-index: 10;
+        }
+        
+        /* Enhanced Image Treatment for Portfolio */
+        .portfolio-img {
+            transition: transform 0.7s ease, opacity 0.5s ease;
+            opacity: 0.5; /* Default darker/faded */
+            filter: grayscale(30%) contrast(110%); /* Slight grayscale for uniformity */
+        }
+
+        .bento-card:hover .portfolio-img {
+            transform: scale(1.05);
+            opacity: 0.8; /* Brighten on hover */
+            filter: grayscale(0%) contrast(100%); /* Restore color */
+        }
+
+        /* Profile Image Styling */
+        .profile-container {
+            position: relative;
+            /* Subtle mask to blend bottom into darkness */
+            -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+            mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+        }
+
+        .profile-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120%;
+            height: 120%;
+            background: radial-gradient(circle, rgba(41, 151, 255, 0.15) 0%, rgba(0,0,0,0) 70%); /* Reduced opacity */
+            filter: blur(50px);
+            z-index: -1;
+        }
+
+        /* Background Grid */
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+            -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+        }
+
+        /* Floating Decor Element */
+        .floating-decor {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Spec Card */
+        .spec-card {
+            background: #151516;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.3s ease;
+        }
+        .spec-card:hover {
+            background: #1c1c1e;
+            border-color: rgba(255,255,255,0.1);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body class="antialiased bg-black">
+
+    <!-- Noise Overlay for Film Grain Effect -->
+    <div class="noise-overlay"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-[980px] mx-auto px-4 h-12 flex items-center justify-between text-xs font-medium tracking-wide">
+            <a href="#" class="text-white hover:text-apple-subtext transition-colors flex items-center gap-2 font-semibold text-sm">
+                Aron Song
+            </a>
+            <div class="flex space-x-6 md:space-x-8">
+                <a href="#philosophy" class="text-apple-text hover:text-apple-accent transition-colors">Philosophy</a>
+                <a href="#work" class="text-apple-text hover:text-apple-accent transition-colors">Work</a>
+                <a href="#evolution" class="text-apple-text hover:text-apple-accent transition-colors">Evolution</a>
+                <a href="#contact" class="px-3 py-1 bg-white text-black rounded-full hover:bg-gray-200 transition-colors">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center pt-20 pb-10 overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute inset-0 bg-grid pointer-events-none"></div>
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[800px] bg-blue-900/10 rounded-full blur-[100px] pointer-events-none"></div>
+        
+        <!-- Floating Decorative Elements (Abstract Tech) -->
+        <div class="absolute top-1/4 left-10 md:left-1/4 w-24 h-32 floating-decor rounded-xl rotate-[-15deg] animate-float pointer-events-none hidden lg:block"></div>
+        <div class="absolute bottom-1/4 right-10 w-16 h-16 floating-decor rounded-lg rotate-[10deg] animate-float-delayed pointer-events-none opacity-50 hidden lg:block"></div>
+
+        <div class="max-w-[1100px] mx-auto px-6 w-full z-10">
+            <div class="flex flex-col-reverse md:flex-row items-center justify-between gap-12">
+                
+                <!-- Left: Text -->
+                <div class="flex-1 text-center md:text-left fade-in-up delay-100 relative">
+                    <!-- Eyebrow Label -->
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 mb-6 backdrop-blur-sm">
+                        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                        <span class="text-xs font-medium text-apple-subtext tracking-wider uppercase">Open to Opportunities</span>
+                    </div>
+
+                    <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 leading-[1.1]">
+                        <span class="block text-white">Beyond Logic.</span>
+                        <span class="block text-gradient">Pure Intuition.</span>
+                    </h1>
+                    <p class="text-xl text-apple-subtext max-w-lg mx-auto md:mx-0 leading-relaxed mb-8">
+                        從複雜的代碼到直觀的產品體驗。<br>
+                        11 年 Web3 與 AI 領域的極致探索，專注於 0 到 1 的架構設計與商業落地。
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row justify-center md:justify-start gap-4 mb-12">
+                        <a href="#work" class="px-8 py-3 bg-apple-accent hover:bg-blue-500 text-white rounded-full text-lg font-medium transition-all transform hover:scale-105 shadow-lg shadow-blue-900/30">
+                            View Projects
+                        </a>
+                        <a href="https://www.cake.me/resumes/songpu717" target="_blank" class="px-8 py-3 bg-[#1d1d1f] hover:bg-[#2c2c2e] text-apple-accent rounded-full text-lg font-medium transition-all flex items-center justify-center gap-2 border border-white/10">
+                            Resume <i class="fas fa-arrow-right text-sm"></i>
+                        </a>
+                    </div>
+
+                    <!-- Core Focus Tags (To fill space and add info) -->
+                    <div class="pt-8 border-t border-white/10 flex flex-wrap justify-center md:justify-start gap-x-8 gap-y-3">
+                        <div class="flex items-center gap-2 text-xs font-semibold tracking-widest text-apple-subtext">
+                            <i class="fas fa-wand-magic-sparkles text-apple-accent"></i> VIBE CODING
+                        </div>
+                        <div class="flex items-center gap-2 text-xs font-semibold tracking-widest text-apple-subtext">
+                            <i class="fas fa-layer-group text-apple-accent"></i> WEB3 STRATEGY
+                        </div>
+                        <div class="flex items-center gap-2 text-xs font-semibold tracking-widest text-apple-subtext">
+                            <i class="fas fa-robot text-apple-accent"></i> AI PRODUCT
+                        </div>
+                        <div class="flex items-center gap-2 text-xs font-semibold tracking-widest text-apple-subtext">
+                            <i class="fas fa-chart-pie text-apple-accent"></i> DEFI LOGIC
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Photo (Optimized) -->
+                <div class="flex-1 flex justify-center md:justify-end fade-in-up">
+                    <div class="relative w-48 h-48 md:w-64 md:h-64 animate-float">
+                        <div class="profile-glow"></div>
+                        <div class="profile-container w-full h-full rounded-full overflow-hidden border border-[#333] shadow-2xl relative z-10 bg-[#1c1c1e]">
+                            <img src="https://img.cake.me/cdn-cgi/image/fit=scale-down,format=auto,w=1920/https://images.cakeresume.com/kzwNA/songpu717/27cf51d5-7b7f-47a4-bcfe-06b40a97d5e6.png" 
+                                 alt="Aron Song" 
+                                 class="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity duration-700">
+                        </div>
+                        <!-- Badges -->
+                        <div class="absolute top-6 -right-4 bg-[#1c1c1e]/80 backdrop-blur border border-white/5 px-3 py-1.5 rounded-xl shadow-xl z-20 animate-pulse-slow">
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-rocket text-apple-accent text-xs"></i>
+                                <span class="text-xs font-bold text-white">0-to-1</span>
+                            </div>
+                        </div>
+                        <div class="absolute bottom-6 -left-4 bg-[#1c1c1e]/80 backdrop-blur border border-white/5 px-3 py-1.5 rounded-xl shadow-xl z-20 animate-pulse-slow" style="animation-delay: 2s;">
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-chart-line text-green-400 text-xs"></i>
+                                <span class="text-xs font-bold text-white">$10B+</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce opacity-30">
+            <i class="fas fa-chevron-down text-white text-xl"></i>
+        </div>
+    </section>
+
+    <!-- Philosophy Section -->
+    <section id="philosophy" class="py-32 bg-black relative overflow-hidden">
+        <!-- Decorative Background Blur -->
+        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-900/10 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-900/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+        <div class="max-w-[980px] mx-auto px-6 relative z-10">
+            <h2 class="text-4xl md:text-6xl font-bold leading-tight text-white mb-16 fade-in-up">
+                不僅是管理產品，<br>
+                <span class="text-apple-subtext">更是設計商業生態系統。</span>
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="glass-card-light p-8 rounded-3xl fade-in-up delay-100 group hover:bg-[#2c2c2e] transition-colors duration-500">
+                    <div class="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 border border-white/5">
+                        <i class="fas fa-brain text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">INTJ-A 架構師</h3>
+                    <p class="text-apple-subtext text-sm leading-relaxed">
+                        以前瞻性思維構建系統。不只解決當下的痛點，更預判未來的規模化挑戰。
+                    </p>
+                </div>
+
+                <!-- Card 2: Vibe Coding -->
+                <div class="glass-card-light p-8 rounded-3xl fade-in-up delay-200 group hover:bg-[#2c2c2e] transition-colors duration-500">
+                    <div class="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 border border-white/5">
+                        <i class="fas fa-bolt text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Vibe Coding 實踐者</h3>
+                    <p class="text-apple-subtext text-sm leading-relaxed">
+                        善用 AI 協作開發。不寫繁瑣代碼，而是透過自然語言與 LLM 共舞，快速驗證產品「感覺」，實現 10x 開發效率。
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="glass-card-light p-8 rounded-3xl fade-in-up delay-300 group hover:bg-[#2c2c2e] transition-colors duration-500 border border-blue-500/20">
+                    <div class="w-14 h-14 bg-blue-600/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 border border-blue-500/20">
+                        <i class="fas fa-chart-line text-2xl text-blue-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-1">$10B+ 交易額</h3>
+                    <p class="text-xs text-blue-400 font-mono mb-3 uppercase tracking-widest">Proven Track Record</p>
+                    <p class="text-apple-subtext text-sm leading-relaxed">
+                        經手百億級美金的金融產品。對數字敏感，對風控嚴謹，確保商業可持續性。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Selected Works Section -->
+    <section id="work" class="py-20 bg-[#050507]">
+        <div class="max-w-[1200px] mx-auto px-6">
+            <div class="mb-16 fade-in-up flex flex-col md:flex-row md:items-end md:justify-between">
+                <div>
+                    <h2 class="text-3xl md:text-5xl font-bold text-white mb-4">Selected Works.</h2>
+                    <p class="text-2xl text-white font-medium mb-2">Defying expectations.</p>
+                    <p class="text-apple-subtext text-lg max-w-2xl leading-relaxed">
+                        融合 Web3 金融科技與 AI 智慧醫療，打造定義未來的產品體驗。
+                    </p>
+                </div>
+            </div>
+
+            <!-- Grid Container -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Project 1: Top.one (Real Image Used) -->
+                <div class="bento-card md:col-span-2 bg-gray-900 h-[450px] lg:h-[550px] fade-in-up delay-100 group">
+                    <div class="absolute inset-0">
+                        <img src="https://img.cake.me/cdn-cgi/image/fit=scale-down,format=auto,w=1920/https://images.cakeresume.com/kzwNA/songpu717/3cb40a7b-48b4-48c1-93f0-cf3e014356ee.png" 
+                             class="w-full h-full object-cover portfolio-img" 
+                             alt="Top.one Interface">
+                        <!-- Stronger gradient for text readability -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent pointer-events-none"></div>
+                    </div>
+                    <div class="relative z-10 p-8 lg:p-12 flex flex-col h-full justify-end">
+                        <div class="flex items-center gap-3 mb-2">
+                             <span class="px-3 py-1 bg-blue-600/30 border border-blue-500/30 backdrop-blur-md text-blue-400 text-xs font-bold rounded-full uppercase tracking-wider">Flagship</span>
+                             <span class="px-3 py-1 bg-white/10 border border-white/10 backdrop-blur-md text-white text-xs font-bold rounded-full uppercase tracking-wider">FinTech</span>
+                        </div>
+                        <h3 class="text-3xl lg:text-4xl font-bold text-white mb-2 drop-shadow-md">Top.one Exchange</h3>
+                        <p class="text-gray-300 text-base lg:text-lg max-w-lg mb-6 drop-shadow-sm">
+                            定義極致的高槓桿合約體驗。整合智能做市機器人與 1000x 槓桿風控模型。
+                        </p>
+                         <div class="flex flex-wrap items-end justify-between gap-4 border-t border-white/10 pt-6">
+                             <div class="flex gap-6">
+                                 <div class="flex flex-col">
+                                     <span class="text-xl lg:text-2xl font-bold text-white">1000x</span>
+                                     <span class="text-xs text-gray-400 uppercase tracking-wide">Max Leverage</span>
+                                 </div>
+                                 <div class="flex flex-col">
+                                     <span class="text-xl lg:text-2xl font-bold text-white">Scrum</span>
+                                     <span class="text-xs text-gray-400 uppercase tracking-wide">Agile</span>
+                                 </div>
+                             </div>
+                             <a href="https://www.cake.me/portfolios/301cb0" target="_blank" class="inline-flex items-center px-5 py-2 rounded-full bg-white text-black font-medium hover:bg-gray-200 transition-colors text-sm z-20">
+                                View Case Study <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                             </a>
+                         </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: Seeker (Real Image Used) -->
+                <div class="bento-card bg-[#151516] h-[450px] lg:h-[550px] flex flex-col fade-in-up delay-200 group">
+                    <div class="h-[55%] relative overflow-hidden bg-[#1c1c1e]">
+                         <img src="https://img.cake.me/cdn-cgi/image/fit=scale-down,format=auto,w=1920/https://images.cakeresume.com/kzwNA/songpu717/7ed19eb2-dec8-46af-9a06-4d13e7f2724e.png" 
+                              class="w-full h-full object-cover object-top portfolio-img" 
+                              alt="Seeker Browser">
+                         <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#151516] pointer-events-none"></div>
+                    </div>
+                    <div class="p-8 flex-grow flex flex-col justify-center relative z-10">
+                        <div class="mb-3">
+                            <span class="px-2 py-1 bg-white/5 border border-white/10 text-apple-subtext text-[10px] font-bold rounded uppercase tracking-wider">Infrastructure</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-2">Seeker Browser</h3>
+                        <p class="text-apple-subtext text-sm mb-6">
+                            Web3 世界的統一入口。集成多鏈錢包、DApp 與分布式存儲。
+                        </p>
+                        <a href="https://www.cake.me/portfolios/seeker-d6a71d" target="_blank" class="inline-flex items-center text-apple-accent hover:text-white transition-colors text-sm font-medium mt-auto z-20">
+                            View Case Study <i class="fas fa-chevron-right ml-1 text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 3: AI Medical (Real Image Used) -->
+                <div class="bento-card bg-[#151516] h-[450px] lg:h-[550px] flex flex-col fade-in-up delay-300 group">
+                    <div class="h-[60%] relative overflow-hidden p-0">
+                        <img src="https://img.cake.me/cdn-cgi/image/fit=scale-down,format=auto,w=1920/https://images.cakeresume.com/kzwNA/songpu717/99c39ce0-b2df-49a8-9b10-13d4da9f5d2a.png" 
+                             class="w-full h-full object-cover portfolio-img" 
+                             alt="AI Medical">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#151516] via-[#151516]/50 to-transparent pointer-events-none"></div>
+                    </div>
+                    <div class="p-8 -mt-10 relative z-10 flex-grow flex flex-col">
+                         <div class="mb-3">
+                            <span class="px-2 py-1 bg-white/5 border border-white/10 text-apple-subtext text-[10px] font-bold rounded uppercase tracking-wider">AI / MedTech</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-2">AI Medical Imaging</h3>
+                        <p class="text-apple-subtext text-sm mb-6">
+                            拯救生命的設計。整合 AI 肺結節偵測與 PACS 系統，縮短 50% 診療時間。
+                        </p>
+                        <a href="https://www.cake.me/portfolios/e108d7" target="_blank" class="inline-flex items-center text-apple-accent hover:text-white transition-colors text-sm font-medium mt-auto z-20">
+                            View Case Study <i class="fas fa-chevron-right ml-1 text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 4: Bi.top (Real Image Used) -->
+                <div class="bento-card md:col-span-2 lg:col-span-2 bg-gray-900 h-[400px] lg:h-[500px] flex items-center overflow-hidden fade-in-up delay-400 group">
+                    <div class="absolute right-0 top-0 w-2/3 h-full hidden md:block">
+                        <img src="https://img.cake.me/cdn-cgi/image/fit=scale-down,format=auto,w=1920/https://images.cakeresume.com/kzwNA/songpu717/f9de2548-87ae-4e88-97ec-e17de163b889.png" 
+                             class="w-full h-full object-cover portfolio-img" 
+                             style="mask-image: linear-gradient(to right, transparent, black 30%); -webkit-mask-image: linear-gradient(to right, transparent, black 30%);"
+                             alt="Bi.top Ecosystem">
+                    </div>
+                    <div class="p-8 lg:p-12 relative z-10 w-full md:w-2/3">
+                        <div class="mb-4">
+                            <i class="fab fa-bitcoin text-4xl text-yellow-500 mb-4 block"></i>
+                        </div>
+                        <h3 class="text-3xl font-bold text-white mb-2">Bi.top Ecosystem</h3>
+                        <p class="text-gray-400 text-base mb-8 max-w-md">
+                            全球首創「礦池 + 交易」生態閉環。整合 28% 全網算力，從 0 到 1 打造獲千萬美元融資的平台。
+                        </p>
+                        <a href="https://www.cake.me/portfolios/301cb0" target="_blank" class="px-6 py-3 bg-white/10 hover:bg-white/20 backdrop-blur text-white rounded-full text-sm font-medium transition-colors border border-white/10 z-20">
+                            Explore Ecosystem
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 5: BTC Monitor (Personal Project) -->
+                <div class="bento-card md:col-span-2 lg:col-span-3 bg-[#0f0f10] h-[400px] flex flex-row overflow-hidden fade-in-up delay-500 group border border-white/5">
+                    <!-- Left Content -->
+                    <div class="p-8 lg:p-12 relative z-10 w-full md:w-1/2 flex flex-col justify-center">
+                        <div class="mb-4">
+                            <span class="px-3 py-1 bg-orange-500/20 border border-orange-500/30 text-orange-400 text-xs font-bold rounded-full uppercase tracking-wider">Personal Project</span>
+                        </div>
+                        <h3 class="text-3xl font-bold text-white mb-2">BTC Data Monitor</h3>
+                        <p class="text-gray-400 text-base mb-6">
+                            自研比特幣數據監控面板。即時追蹤鏈上數據與市場指標，為個人投資決策提供數據支持。
+                        </p>
+                        <a href="https://north7.github.io/btc-dashboard/" target="_blank" class="inline-flex items-center text-apple-accent hover:text-white transition-colors text-sm font-medium z-20">
+                            Launch Dashboard <i class="fas fa-external-link-alt ml-2 text-xs"></i>
+                        </a>
+                    </div>
+                    <!-- Right Image -->
+                    <div class="absolute right-0 top-0 w-1/2 h-full hidden md:block">
+                        <img src="https://images.unsplash.com/photo-1640340434855-6084b1f4901c?q=80&w=1600&auto=format&fit=crop" 
+                             class="w-full h-full object-cover portfolio-img" 
+                             style="mask-image: linear-gradient(to right, transparent, black 20%); -webkit-mask-image: linear-gradient(to right, transparent, black 20%);"
+                             alt="BTC Dashboard">
+                        <div class="absolute inset-0 bg-gradient-to-l from-transparent via-[#0f0f10]/20 to-[#0f0f10] pointer-events-none"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Evolution Section -->
+    <section id="evolution" class="py-32 bg-black">
+        <div class="max-w-[980px] mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-bold text-white mb-20 text-center fade-in-up">Evolution.</h2>
+            
+            <div class="relative border-l border-apple-border/50 ml-4 md:ml-0 md:pl-0 space-y-20">
+                
+                <!-- Item 1 -->
+                <div class="relative md:grid md:grid-cols-5 gap-8 group fade-in-up">
+                    <div class="md:col-span-1 md:text-right pt-1">
+                        <span class="text-2xl font-bold text-white block">v.5.0</span>
+                        <span class="text-sm text-apple-subtext font-mono">2023-2025</span>
+                    </div>
+                    <div class="hidden md:block absolute left-[20%] top-2 w-3 h-3 bg-gray-600 rounded-full -ml-[7px] ring-4 ring-black bg-white shadow-[0_0_10px_rgba(255,255,255,0.5)]"></div>
+                    <div class="md:col-span-4 pl-8 md:pl-0">
+                        <h3 class="text-2xl font-bold text-white group-hover:text-white transition-colors">Product Manager</h3>
+                        <p class="text-apple-subtext mb-4">亞太滿譽科技有限公司</p>
+                        
+                        <div class="flex gap-2 mb-4">
+                            <span class="px-2 py-1 bg-white/10 rounded text-xs text-white">Exchange Core</span>
+                            <span class="px-2 py-1 bg-white/10 rounded text-xs text-white">Risk Control</span>
+                        </div>
+
+                        <p class="text-gray-400 leading-relaxed mb-4">
+                            專注於高槓桿合約交易的核心架構。將複雜的做市策略與風控模型轉化為直觀的用戶產品。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="relative md:grid md:grid-cols-5 gap-8 group fade-in-up delay-100">
+                    <div class="md:col-span-1 md:text-right pt-1">
+                        <span class="text-2xl font-bold text-white block">v.4.0</span>
+                        <span class="text-sm text-apple-subtext font-mono">2019-2023</span>
+                    </div>
+                    <div class="hidden md:block absolute left-[20%] top-2 w-3 h-3 bg-gray-600 rounded-full -ml-[7px] ring-4 ring-black"></div>
+                    <div class="md:col-span-4 pl-8 md:pl-0">
+                        <h3 class="text-2xl font-bold text-white group-hover:text-white transition-colors">Web3 Product Lead</h3>
+                        <p class="text-apple-subtext mb-4">上海分布信息科技</p>
+                        
+                         <div class="flex gap-2 mb-4">
+                            <span class="px-2 py-1 bg-white/10 rounded text-xs text-white">DeFi</span>
+                            <span class="px-2 py-1 bg-white/10 rounded text-xs text-white">Blockchain Browser</span>
+                            <span class="px-2 py-1 bg-white/10 rounded text-xs text-white">Wallet</span>
+                        </div>
+
+                        <p class="text-gray-400 leading-relaxed">
+                            定義去中心化存儲的標準。從瀏覽器到錢包，構建完整的 Web3 基礎設施生態。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="relative md:grid md:grid-cols-5 gap-8 group fade-in-up delay-200">
+                    <div class="md:col-span-1 md:text-right pt-1">
+                        <span class="text-2xl font-bold text-white block">v.3.0</span>
+                        <span class="text-sm text-apple-subtext font-mono">2018-2019</span>
+                    </div>
+                    <div class="hidden md:block absolute left-[20%] top-2 w-3 h-3 bg-gray-600 rounded-full -ml-[7px] ring-4 ring-black"></div>
+                    <div class="md:col-span-4 pl-8 md:pl-0">
+                        <h3 class="text-2xl font-bold text-white">Exchange PM</h3>
+                        <p class="text-apple-subtext mb-4">原始空氣科技</p>
+                        
+                        <div class="flex gap-2 mb-4">
+                            <span class="px-2 py-1 bg-white/10 rounded text-xs text-white">0-to-1</span>
+                            <span class="px-2 py-1 bg-white/10 rounded text-xs text-white">Mining Pool</span>
+                        </div>
+
+                        <p class="text-gray-400 leading-relaxed">
+                            0 到 1 打造 Bi.top。結合礦業資源與交易平台，實現資源最大化利用。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="relative md:grid md:grid-cols-5 gap-8 group fade-in-up delay-300">
+                    <div class="md:col-span-1 md:text-right pt-1">
+                        <span class="text-2xl font-bold text-white block">v.2.0</span>
+                        <span class="text-sm text-apple-subtext font-mono">2016-2018</span>
+                    </div>
+                    <div class="hidden md:block absolute left-[20%] top-2 w-3 h-3 bg-gray-600 rounded-full -ml-[7px] ring-4 ring-black"></div>
+                    <div class="md:col-span-4 pl-8 md:pl-0">
+                        <h3 class="text-2xl font-bold text-white">AI Healthcare PM</h3>
+                        <p class="text-apple-subtext mb-4">海納醫信</p>
+                        
+                        <div class="flex gap-2 mb-4">
+                            <span class="px-2 py-1 bg-white/10 rounded text-xs text-white">AI Diagnostic</span>
+                            <span class="px-2 py-1 bg-white/10 rounded text-xs text-white">PACS</span>
+                        </div>
+
+                        <p class="text-gray-400 leading-relaxed">
+                            將 AI 引入臨床流程。不僅是技術落地，更解決了醫生實際工作流中的痛點。
+                        </p>
+                    </div>
+                </div>
+
+                 <!-- Item 5 -->
+                 <div class="relative md:grid md:grid-cols-5 gap-8 group fade-in-up delay-400 opacity-50 hover:opacity-100 transition-opacity">
+                    <div class="md:col-span-1 md:text-right pt-1">
+                        <span class="text-2xl font-bold text-white block">Origin</span>
+                        <span class="text-sm text-apple-subtext font-mono">2012-2016</span>
+                    </div>
+                    <div class="hidden md:block absolute left-[20%] top-2 w-3 h-3 bg-gray-800 rounded-full -ml-[7px] ring-4 ring-black"></div>
+                    <div class="md:col-span-4 pl-8 md:pl-0">
+                        <h3 class="text-2xl font-bold text-white">Software Engineer</h3>
+                        <p class="text-apple-subtext mb-2">宏元富成 / 四川宏力</p>
+                        <p class="text-gray-400 leading-relaxed">
+                            Code is the foundation. 全端開發經驗，奠定了對技術可行性的精準判斷。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Specs (Redesigned as Spec Cards) -->
+    <section class="py-32 bg-[#0a0a0a] border-t border-white/5">
+        <div class="max-w-[980px] mx-auto px-6">
+            <h2 class="text-3xl font-bold text-white mb-16 fade-in-up">Technical Specifications</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <!-- Spec Card 1 -->
+                <div class="spec-card p-6 rounded-2xl fade-in-up delay-100">
+                    <div class="w-10 h-10 bg-blue-900/20 rounded-lg flex items-center justify-center mb-4 text-blue-400">
+                        <i class="fas fa-chess-knight"></i>
+                    </div>
+                    <h4 class="text-white font-bold mb-2">Core Strategy</h4>
+                    <div class="text-apple-subtext text-sm space-y-1">
+                        <p>0-1 Product Lifecycle</p>
+                        <p>Agile / Scrum</p>
+                        <p>Data-Driven Growth</p>
+                    </div>
+                </div>
+
+                <!-- Spec Card 2 -->
+                <div class="spec-card p-6 rounded-2xl fade-in-up delay-200">
+                    <div class="w-10 h-10 bg-purple-900/20 rounded-lg flex items-center justify-center mb-4 text-purple-400">
+                        <i class="fas fa-cubes"></i>
+                    </div>
+                    <h4 class="text-white font-bold mb-2">Web3 Tech</h4>
+                    <div class="text-apple-subtext text-sm space-y-1">
+                        <p>DeFi / Tokenomics</p>
+                        <p>Smart Contract Logic</p>
+                        <p>Wallet Security</p>
+                    </div>
+                </div>
+
+                <!-- Spec Card 3: AI & Vibe Coding -->
+                <div class="spec-card p-6 rounded-2xl fade-in-up delay-300">
+                    <div class="w-10 h-10 bg-green-900/20 rounded-lg flex items-center justify-center mb-4 text-green-400">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h4 class="text-white font-bold mb-2">AI & Vibe Stack</h4>
+                    <div class="text-apple-subtext text-sm space-y-1">
+                        <p>Cursor / Windsurf</p>
+                        <p>LLM Prompting</p>
+                        <p>Rapid Prototyping</p>
+                    </div>
+                </div>
+
+                <!-- Spec Card 4 -->
+                <div class="spec-card p-6 rounded-2xl fade-in-up delay-400">
+                    <div class="w-10 h-10 bg-red-900/20 rounded-lg flex items-center justify-center mb-4 text-red-400">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h4 class="text-white font-bold mb-2">Education</h4>
+                    <div class="text-apple-subtext text-sm space-y-1">
+                        <p>MSc Computer Science</p>
+                        <p>Newcastle University</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="contact" class="py-32 bg-black text-center relative overflow-hidden">
+        <div class="relative z-10 max-w-2xl mx-auto px-6">
+            <h2 class="text-5xl md:text-7xl font-bold text-white mb-8 tracking-tight fade-in-up">
+                Let's build <br>
+                <span class="text-gradient-blue">the next big thing.</span>
+            </h2>
+            <p class="text-xl text-apple-subtext mb-12 fade-in-up delay-100">
+                Seeking challenges in Web3 & FinTech.
+            </p>
+            
+            <div class="flex flex-col md:flex-row justify-center items-center gap-6 fade-in-up delay-200">
+                <!-- Enhanced Email Button with actual email address -->
+                <a href="mailto:songpu717@gmail.com" class="group relative px-8 py-4 bg-white text-black rounded-full text-lg font-semibold overflow-hidden transition-transform hover:scale-105 cursor-pointer z-30">
+                    <span class="relative z-10 flex items-center gap-2">
+                        <i class="fas fa-envelope text-black"></i>
+                        songpu717@gmail.com
+                    </span>
+                    <div class="absolute inset-0 bg-gray-200 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
+                </a>
+                
+                <a href="tel:0905809887" class="text-white hover:text-apple-accent transition-colors flex items-center gap-2 cursor-pointer z-30">
+                    <i class="fas fa-phone"></i> 0905-809-887
+                </a>
+            </div>
+        </div>
+        
+        <div class="mt-32 text-apple-subtext text-sm">
+            <p>&copy; 2023 Aron Song. Designed in Taipei.</p>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Fade-in Animation
+            const observerOptions = {
+                root: null,
+                rootMargin: "0px",
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            const elements = document.querySelectorAll(".fade-in-up");
+            elements.forEach(el => observer.observe(el));
+
+            // Navbar transparency logic
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('glass-nav');
+                } else {
+                    // Keep consistent glass style
+                }
+            });
+
+            // Fallback for mailto if blocked by environment
+            const emailBtn = document.querySelector('a[href^="mailto:"]');
+            if (emailBtn) {
+                emailBtn.addEventListener('click', function(e) {
+                    // Optional: Log or handle if default action is prevented by environment
+                });
+            }
+        });
+    </script>
+</body>
+</html>
