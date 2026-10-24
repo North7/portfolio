@@ -59,6 +59,16 @@ p { margin: 0; max-width: 68ch; }
 /* 開頭 */
 .hero { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: 40px; align-items: end; }
 .hero .txt { display: flex; flex-direction: column; gap: 22px; }
+/* 主視覺影片：靜音自動播放、循環；「開聲音」從頭播並打開聲音 */
+.hero .hv { justify-self: end; width: min(100%, 340px); }
+.vwrap { position: relative; aspect-ratio: 9 / 16; border-radius: 22px; overflow: hidden; border: 1px solid var(--line); background: #0b0b0b; }
+.vwrap video { width: 100%; height: 100%; display: block; object-fit: cover; }
+.snd { position: absolute; right: 12px; bottom: 12px; display: inline-flex; align-items: center; gap: 6px; font: 700 13px/1 var(--body); color: var(--on-lime);
+  background: var(--lime); border: 0; border-radius: 99px; padding: 9px 13px 9px 11px; cursor: pointer; box-shadow: 0 6px 18px rgba(0,0,0,.35); }
+.snd svg { width: 16px; height: 16px; }
+.snd[aria-pressed="false"] .w { opacity: .35; }
+.snd[aria-pressed="true"] { background: rgba(16,16,16,.72); color: #ECEDE8; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.snd:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
 .meta { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 24px; padding-top: 18px; border-top: 1px solid var(--line); margin: 0; }
 .meta dt { font: 700 11px/1 var(--num); letter-spacing: .16em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
 .meta dd { margin: 0; font-weight: 500; font-size: 15px; }
@@ -174,6 +184,7 @@ td.res { font: 700 15px var(--display); font-variant-numeric: tabular-nums; whit
   nav.toc .brand, nav.toc .who { width: 100%; }
   nav.toc .who { margin-bottom: 6px; }
   nav.toc a { border-left: 0; padding: 0; }
+  .hero .hv { justify-self: center; width: min(100%, 320px); }
   .hero, .two, .wide, .split, .cmpk .pair { grid-template-columns: minmax(0, 1fr); }
   .nums { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .screens { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -213,7 +224,7 @@ nav.toc a.who:hover { color: var(--fg); }
       <div><dt>形態</dt><dd>手機網頁＋本機運算，PDF 報告與分享影片</dd></div>
     </dl>
   </div>
-  <figure><img src="img/hero.jpg" alt="產品封面：網球揮拍者被還原成 3D 人體模型，揮拍軌跡是一道綠色光帶" width="900" height="1125"><figcaption>產品的主視覺：用一段手機影片把揮拍還原成 3D。</figcaption></figure>
+  <figure class="hv"><div class="vwrap"><video id="heroVid" src="media/onestroke-promo-web.mp4" poster="media/onestroke-promo-poster.jpg" autoplay muted loop playsinline preload="auto" aria-label="48 秒的產品介紹影片：自動切拍、評分、3D 子彈時間、做到與沒做到、練習方案、PDF 報告與教練版"></video><button class="snd" id="snd" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path class="w" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>開聲音</span></button></div><figcaption>48 秒產品介紹影片；點「開聲音」從頭聽原創配樂。</figcaption></figure>
 </section>
 
 <div class="nums" role="list">
@@ -492,6 +503,27 @@ nav.toc a.who:hover { color: var(--fg); }
 
 </main>
 </div>
+
+<script>
+(() => {   // 主視覺影片：靜音自動播放；「開聲音」從頭播並打開聲音，再按一次靜音
+  const v = document.getElementById("heroVid"), b = document.getElementById("snd");
+  if (!v || !b) return;
+  const lab = b.querySelector("span");
+  const sync = () => { const on = !v.muted && !v.paused; b.setAttribute("aria-pressed", on); lab.textContent = on ? "靜音" : "開聲音"; };
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) { v.removeAttribute("autoplay"); v.pause(); }
+  let heard = false;
+  b.addEventListener("click", () => {
+    if (v.muted || v.paused) {
+      if (!heard) { v.currentTime = 0; heard = true; }
+      v.muted = false;
+      v.play().catch(() => {});
+    } else v.muted = true;
+    sync();
+  });
+  ["volumechange", "play", "pause"].forEach(e => v.addEventListener(e, sync));
+  sync();
+})();
+</script>
 
 </body>
 </html>
