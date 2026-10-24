@@ -88,6 +88,8 @@ ul.plain li::marker { color: var(--ring); }
 .node { background: var(--card2); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
 .node b { font: 700 15px/1.35 var(--body); }
 .node small { font-size: 12.5px; line-height: 1.5; color: var(--muted); }
+.node .path { font: 500 11.5px/1.5 var(--num); color: var(--muted); opacity: .75; margin-top: 2px; }
+.node .path i { font-style: normal; white-space: nowrap; color: var(--fg); opacity: .8; }
 .node.key { background: var(--lime); border-color: var(--lime); color: var(--on-lime); }
 .node.key small { color: rgba(18,20,18,.72); }
 .tag { display: inline-block; font: 700 10.5px/1 var(--num); letter-spacing: .08em; padding: 4px 7px; border-radius: 99px; border: 1px solid var(--line); color: var(--muted); margin-top: 4px; align-self: flex-start; }
@@ -308,7 +310,7 @@ nav.toc a.who:hover { color: var(--fg); }
       <div class="row" style="--n:4"><div class="node"><b>切片＋2D</b><small>PyAV、ONNX（CoreML 加速）、MediaPipe</small></div><div class="node"><b>3D</b><small>PyTorch（Apple MPS）、SAM 3D Body、MHR 網格</small></div><div class="node"><b>報告與 PDF</b><small>Python 產生 HTML；Chrome 無頭模式印 A4</small></div><div class="node"><b>綜合分析</b><small>Claude Code 無頭模式，照撰寫規範寫</small></div></div></div>
     <div class="down">讀寫</div>
     <div class="layer"><div class="lab">資料<span>每位球員一個資料夾</span></div>
-      <div class="row" style="--n:4"><div class="node key"><b>路徑層</b><small>所有位置集中管理；換帳號系統只改這層</small></div><div class="node"><b>報告</b><small>reports/&lt;球員&gt;/&lt;練習&gt;：切片、姿態、3D、分享影片</small></div><div class="node"><b>快取</b><small>data/&lt;球員&gt;/&lt;日期&gt;/&lt;影片&gt;：2D／3D 姿態、人工修正</small></div><div class="node"><b>名冊與回收區</b><small>球員名冊；刪除的練習保留 30 天</small></div></div></div>
+      <div class="row" style="--n:4"><div class="node key"><b>路徑層</b><small>所有位置集中管理；換帳號系統只改這層</small></div><div class="node"><b>報告</b><small>每一場一個資料夾：切片、姿態、3D、分享影片</small><code class="path">reports/<wbr><i>球員</i>/<wbr><i>練習</i></code></div><div class="node"><b>快取</b><small>每支影片的 2D／3D 姿態與人工修正，重做報告不用重算</small><code class="path">data/<wbr><i>球員</i>/<wbr><i>日期</i>/<wbr><i>影片</i></code></div><div class="node"><b>名冊與回收區</b><small>球員名冊；刪除的練習保留 30 天</small></div></div></div>
   </div>
 </section>
 
