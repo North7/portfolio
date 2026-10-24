@@ -1,764 +1,753 @@
 <!DOCTYPE html>
-<html lang="zh-Hant-TW" class="scroll-smooth">
+<html lang="zh-Hant-TW">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aron Song | Product Architect</title>
-    <meta name="description" content="Aron Song - 產品架構師。13年經驗，專注於 Web3 金融科技與 AI 醫療領域的創新。">
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Aron Song | Product Architect</title>
+<meta name="description" content="Aron Song - 產品架構師。13年經驗，專注於 Web3 金融科技與 AI 醫療領域的創新。">
+<meta name="theme-color" content="#0A0A0B">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Aron Song | Product Architect">
+<meta property="og:description" content="從複雜的代碼到直觀的產品體驗。13 年 Web3 與 AI 領域的極致探索，專注於 0 到 1 的架構設計與商業落地。">
+<meta property="og:url" content="https://north7.github.io/portfolio/">
+<meta property="og:image" content="https://north7.github.io/portfolio/img/profile.jpg">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='.5' y='.5' width='31' height='31' rx='9' fill='%23151518' stroke='%232C2C31'/%3E%3Cpath d='M8.5 23 15 9l6.5 14' fill='none' stroke='%23EDEDEF' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M11.6 17.5H25' stroke='%238B7CFF' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;700&display=swap">
+<script>
+  // 動效只在使用者沒有要求減少動態時開啟；沒有 JS 時頁面照常完整顯示
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('motion');
+</script>
+<style>
+/* Obsidian：近黑底、炭灰面板、1px 邊框，紫色只當重點；動效集中在進場、游標與捲動三件事 */
+@property --angle { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
 
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', 'sans-serif'],
-                    },
-                    colors: {
-                        apple: {
-                            bg: '#000000',
-                            card: '#1c1c1e',
-                            cardHover: '#2c2c2e',
-                            text: '#f5f5f7',
-                            subtext: '#86868b',
-                            accent: '#2997ff',
-                            border: '#424245'
-                        }
-                    },
-                    animation: {
-                        'float': 'float 8s ease-in-out infinite',
-                        'float-delayed': 'float 8s ease-in-out 4s infinite',
-                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-15px)' },
-                        }
-                    },
-                    backgroundImage: {
-                        'grid-pattern': "linear-gradient(to right, #333 1px, transparent 1px), linear-gradient(to bottom, #333 1px, transparent 1px)",
-                    }
-                }
-            }
-        }
-    </script>
+:root {
+  --bg: #0A0A0B;
+  --surface: #111113;
+  --surface-2: #17171A;
+  --border: #232327;
+  --border-2: #2C2C31;
+  --line: #1D1D21;
+  --text: #EDEDEF;
+  --text-2: #A1A1AA;
+  --text-3: #8A8A93;
+  --dim: #6E6E77;
+  --accent: #8B7CFF;
+  --accent-rgb: 139, 124, 255;
+  --green: #3DDC97;
+  --sans: "Geist", "Noto Sans TC", system-ui, -apple-system, "PingFang TC", sans-serif;
+  --mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --ease: cubic-bezier(.22, 1, .36, 1);
+  --gutter: clamp(16px, 4vw, 40px);
+  color-scheme: dark;
+}
 
-    <style>
-        body {
-            background-color: #000;
-            color: #f5f5f7;
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
-            overflow-x: hidden;
-        }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 96px; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--sans); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+p, h1, h2, h3 { margin: 0; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+::selection { background: var(--accent); color: var(--bg); }
 
-        /* Global Noise Texture for Premium Feel */
-        .noise-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 9999;
-            opacity: 0.03;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-        }
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 var(--gutter); }
+.narrow { max-width: 1000px; }
+.eyebrow { font: 500 12px/1 var(--mono); letter-spacing: .14em; color: var(--accent); }
+.h2 { font-size: clamp(36px, 4.4vw, 60px); line-height: 1.08; letter-spacing: -.045em; font-weight: 600; }
+.lede { font-size: 16px; line-height: 1.75; color: var(--text-2); }
+.section { padding: clamp(88px, 11vw, 136px) 0; }
+.section-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 48px; }
+.section-head > div { display: flex; flex-direction: column; gap: 16px; }
+.section-head .lede { max-width: 400px; }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 0px;
-            background: transparent;
-        }
+/* ---------- Buttons ---------- */
+.btn { display: inline-flex; align-items: center; gap: 10px; height: 48px; padding: 0 22px; border-radius: 12px; font-size: 15px; font-weight: 500; transition: transform .35s var(--ease), background .25s, border-color .25s; will-change: transform; }
+.btn svg { transition: transform .35s var(--ease); }
+.btn:hover svg { transform: translateX(3px); }
+.btn:hover .ne { transform: translate(2px, -2px); }
+.btn-primary { background: var(--text); color: var(--bg); }
+.btn-primary:hover { background: #FFFFFF; }
+.btn-ghost { border: 1px solid var(--border-2); background: var(--surface); }
+.btn-ghost:hover { border-color: #3A3A41; background: var(--surface-2); }
 
-        /* Text Gradient */
-        .text-gradient {
-            background: linear-gradient(135deg, #ffffff 0%, #86868b 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+/* ---------- Scroll progress ---------- */
+.progress { position: fixed; inset: 0 0 auto 0; height: 2px; background: var(--accent); transform-origin: 0 50%; transform: scaleX(0); z-index: 100; pointer-events: none; }
 
-        .text-gradient-blue {
-            background: linear-gradient(135deg, #2997ff 0%, #007aff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .text-gradient-gold {
-            background: linear-gradient(135deg, #FFD700 0%, #FDB931 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+/* ---------- Nav ---------- */
+.nav-shell { position: sticky; top: 16px; z-index: 50; margin-top: 20px; padding: 0 var(--gutter); }
+.nav { max-width: 1120px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 58px; padding: 0 8px 0 16px; border: 1px solid var(--border); border-radius: 999px; background: rgba(17, 17, 19, .62); -webkit-backdrop-filter: blur(18px) saturate(160%); backdrop-filter: blur(18px) saturate(160%); transition: background .4s, border-color .4s, box-shadow .4s; }
+.nav.scrolled { background: rgba(17, 17, 19, .86); border-color: var(--border-2); box-shadow: 0 18px 50px rgba(0, 0, 0, .5); }
+.brand { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 600; letter-spacing: -.02em; }
+.nav-links { position: relative; display: flex; gap: 2px; }
+.nav-links a { position: relative; z-index: 1; padding: 9px 15px; border-radius: 999px; font-size: 14px; color: var(--text-2); transition: color .25s; }
+.nav-links a:hover, .nav-links a.active { color: var(--text); }
+.nav-pill { position: absolute; top: 0; left: 0; height: 100%; width: 0; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--border-2); opacity: 0; transition: transform .5s var(--ease), width .5s var(--ease), opacity .3s; }
+.nav-cta { height: 42px; padding: 0 18px; border-radius: 999px; font-size: 14px; }
 
-        /* Glassmorphism */
-        .glass-nav {
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: saturate(180%) blur(20px);
-            -webkit-backdrop-filter: saturate(180%) blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
+/* Logo：A 字筆畫先畫出來，再讓橫槓從左往右穿出 A */
+.logo-a, .logo-bar { fill: none; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.logo-a { stroke: var(--text); }
+.logo-bar { stroke: var(--accent); }
+.motion .brand .logo-a { stroke-dasharray: 34; stroke-dashoffset: 34; animation: draw 1.1s var(--ease) .25s forwards; }
+.motion .brand .logo-bar { stroke-dasharray: 14; stroke-dashoffset: 14; animation: draw .8s var(--ease) 1s forwards; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
 
-        .glass-card-light {
-            background: rgba(28, 28, 30, 0.6);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
+/* ---------- Hero ---------- */
+.hero { position: relative; padding: clamp(72px, 10vw, 120px) 0 88px; text-align: center; overflow: hidden; }
+.hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px); background-size: 56px 56px; -webkit-mask-image: radial-gradient(ellipse 70% 55% at 50% 30%, #000 25%, transparent 75%); mask-image: radial-gradient(ellipse 70% 55% at 50% 30%, #000 25%, transparent 75%); pointer-events: none; }
+.motion .hero-grid { animation: grid-pan 24s linear infinite; }
+@keyframes grid-pan { to { background-position: 0 56px, 0 56px; } }
+.hero-glow { position: absolute; left: 0; top: 0; width: 720px; height: 720px; margin: -360px 0 0 -360px; border-radius: 50%; background: radial-gradient(circle, rgba(var(--accent-rgb), .16), transparent 62%); pointer-events: none; transform: translate(50vw, 260px); will-change: transform; }
+.hero .wrap { position: relative; display: flex; flex-direction: column; align-items: center; gap: 28px; }
+.badge { display: inline-flex; align-items: center; gap: 10px; padding: 6px 14px 6px 10px; border: 1px solid var(--border); border-radius: 999px; background: var(--surface); font-size: 13px; color: var(--text-2); }
+.badge .sep { width: 1px; height: 12px; background: var(--border-2); }
+.dot { position: relative; width: 8px; height: 8px; border-radius: 50%; background: var(--green); flex: none; }
+.motion .dot::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: var(--green); animation: ping 2.2s cubic-bezier(0, 0, .2, 1) infinite; }
+@keyframes ping { 75%, 100% { transform: scale(2.6); opacity: 0; } }
+.hero h1 { font-size: clamp(48px, 7.4vw, 108px); line-height: .98; letter-spacing: -.05em; font-weight: 600; }
+.hero h1 .dim { color: var(--dim); }
+.hero .lede { max-width: 620px; font-size: 18px; }
+.hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
 
-        /* Animations */
-        .fade-in-up {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
+/* 進場：依 --d 依序淡入、上移、去模糊 */
+.motion [data-intro] { opacity: 0; transform: translateY(18px); filter: blur(6px); transition: opacity 1s var(--ease), transform 1s var(--ease), filter 1s var(--ease); transition-delay: var(--d, 0ms); }
+.motion.is-loaded [data-intro] { opacity: 1; transform: none; filter: none; }
 
-        .fade-in-up.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+/* 逐字遮罩上升（中文逐字、英文逐詞） */
+.motion [data-split] .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .1em; margin-bottom: -.1em; }
+.motion [data-split] .wi { display: inline-block; transform: translateY(110%); transition: transform 1s var(--ease); transition-delay: calc(var(--i) * 38ms + var(--base, 0ms)); }
+.motion [data-split].in .wi { transform: none; }
 
-        .bento-card {
-            background-color: #1c1c1e;
-            border-radius: 30px;
-            overflow: hidden;
-            position: relative;
-            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s ease;
-            transform: translateZ(0);
-        }
+/* Profile window：3D 立起來，之後跟著游標微傾 */
+.stage { width: 100%; max-width: 1040px; margin-top: 44px; perspective: 1600px; }
+.motion .stage[data-intro] { transform: translateY(48px) rotateX(16deg) scale(.96); filter: none; transition-duration: 1.4s; }
+.motion.is-loaded .stage[data-intro] { transform: none; }
+.window { border: 1px solid var(--border); border-radius: 20px; background: var(--surface); overflow: hidden; text-align: left; transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform .6s var(--ease), box-shadow .6s; box-shadow: 0 40px 120px -40px rgba(var(--accent-rgb), .25), 0 30px 80px -30px rgba(0, 0, 0, .7); }
+.window-bar { display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 16px; border-bottom: 1px solid var(--border); }
+.window-bar i { width: 10px; height: 10px; border-radius: 50%; background: var(--border-2); }
+.window-title { flex: 1; text-align: center; font: 400 12px/1 var(--mono); color: var(--text-3); }
+.caret { display: inline-block; width: 7px; height: 13px; margin-left: 2px; vertical-align: -2px; background: var(--accent); }
+.motion .caret { animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.window-body { display: grid; grid-template-columns: 5fr 7fr; }
+.window-photo { overflow: hidden; min-height: 420px; }
+.window-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 25%; }
+.motion .window-photo img { transform: scale(1.12); transition: transform 2.2s var(--ease) .5s; }
+.motion.is-loaded .window-photo img { transform: scale(1); }
+.spec { padding: 24px 32px; display: flex; flex-direction: column; }
+.spec-row { display: grid; grid-template-columns: 140px minmax(0, 1fr); gap: 16px; padding: 15px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+.spec-row:last-child { border-bottom: 0; }
+.spec-row dt { font: 400 12px/1.9 var(--mono); color: var(--text-3); }
+.spec-row dd { margin: 0; display: flex; align-items: center; gap: 8px; }
+.motion .spec-row { opacity: 0; transform: translateX(14px); transition: opacity .7s var(--ease), transform .7s var(--ease); transition-delay: calc(1100ms + var(--i) * 80ms); }
+.motion.is-loaded .spec-row { opacity: 1; transform: none; }
 
-        .bento-card:hover {
-            transform: scale(1.02);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-            z-index: 10;
-        }
-        
-        /* Enhanced Image Treatment for Portfolio */
-        .portfolio-img {
-            transition: transform 0.7s ease, opacity 0.5s ease;
-            opacity: 0.5; /* Default darker/faded */
-            filter: grayscale(30%) contrast(110%); /* Slight grayscale for uniformity */
-        }
+/* ---------- Teams marquee ---------- */
+.teams { padding: 48px 0 8px; display: flex; flex-direction: column; align-items: center; gap: 22px; }
+.teams-label { font: 400 12px/1 var(--mono); letter-spacing: .12em; color: var(--text-3); }
+.marquee { width: 100%; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent); mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent); }
+.track { display: flex; width: max-content; }
+.group { display: flex; gap: 64px; padding-right: 64px; font-size: 18px; font-weight: 500; color: var(--text-3); white-space: nowrap; }
+.group span { transition: color .3s; }
+.group span:hover { color: var(--text); }
+.motion .track { animation: marquee 34s linear infinite; }
+.marquee:hover .track { animation-play-state: paused; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+html:not(.motion) .track { width: auto; justify-content: center; }
+html:not(.motion) .group { flex-wrap: wrap; justify-content: center; gap: 16px 48px; padding: 0; }
+html:not(.motion) .group[aria-hidden] { display: none; }
 
-        .bento-card:hover .portfolio-img {
-            transform: scale(1.05);
-            opacity: 0.8; /* Brighten on hover */
-            filter: grayscale(0%) contrast(100%); /* Restore color */
-        }
+/* ---------- Metrics ---------- */
+.metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 56px; border: 1px solid var(--border); border-radius: 20px; background: var(--surface); overflow: hidden; }
+.metric { position: relative; padding: 28px 28px 30px; display: flex; flex-direction: column; gap: 10px; }
+.metric + .metric { border-left: 1px solid var(--border); }
+.metric-label { font: 400 12px/1 var(--mono); letter-spacing: .1em; color: var(--text-3); }
+.metric-num { font-size: clamp(38px, 4vw, 54px); font-weight: 600; letter-spacing: -.045em; line-height: 1; font-variant-numeric: tabular-nums; }
+.metric-num small { font-size: .42em; letter-spacing: 0; margin-left: 4px; font-weight: 500; }
+.metric p { font-size: 14px; color: var(--text-2); }
+.metric::after { content: ""; position: absolute; left: 28px; right: 28px; bottom: 0; height: 2px; background: var(--accent); transform: scaleX(0); transform-origin: 0 50%; transition: transform 1.4s var(--ease) calc(var(--d, 0ms) + 200ms); }
+.metrics.in .metric::after { transform: scaleX(1); }
+html:not(.motion) .metric::after { display: none; }
 
-        /* Profile Image Styling */
-        .profile-container {
-            position: relative;
-            /* Subtle mask to blend bottom into darkness */
-            -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
-            mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
-        }
+/* ---------- Reveal on scroll ---------- */
+.motion [data-reveal] { opacity: 0; transform: translateY(32px); transition: opacity 1s var(--ease), transform 1s var(--ease); transition-delay: var(--d, 0ms); }
+.motion [data-reveal="left"] { transform: translateX(-28px); }
+.motion [data-reveal="scale"] { transform: translateY(24px) scale(.97); }
+.motion [data-reveal].in { opacity: 1; transform: none; }
 
-        .profile-glow {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 120%;
-            height: 120%;
-            background: radial-gradient(circle, rgba(41, 151, 255, 0.15) 0%, rgba(0,0,0,0) 70%); /* Reduced opacity */
-            filter: blur(50px);
-            z-index: -1;
-        }
+/* ---------- Cards：游標聚光邊框 + 內光 ---------- */
+.card { position: relative; isolation: isolate; height: 100%; border: 1px solid var(--border); border-radius: 20px; background: var(--surface); transition: transform .5s var(--ease), border-color .3s, box-shadow .5s var(--ease); }
+.card::before { content: ""; position: absolute; inset: -1px; border-radius: inherit; padding: 1px; background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(var(--accent-rgb), .7), transparent 42%); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; opacity: 0; transition: opacity .35s; pointer-events: none; }
+.card::after { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; background: radial-gradient(560px circle at var(--mx, 50%) var(--my, 50%), rgba(var(--accent-rgb), .07), transparent 45%); opacity: 0; transition: opacity .35s; pointer-events: none; }
+.card:hover::before, .card:hover::after { opacity: 1; }
+a.card:hover { transform: translateY(-4px); box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .8); }
 
-        /* Background Grid */
-        .bg-grid {
-            background-size: 40px 40px;
-            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                              linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
-            -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
-        }
+/* Approach */
+.approach-head { display: flex; flex-direction: column; align-items: center; gap: 18px; text-align: center; margin-bottom: 56px; }
+.approach-head .h2 { font-size: clamp(32px, 4vw, 52px); line-height: 1.22; letter-spacing: -.035em; }
+.approach-head .dim { color: var(--text-3); }
+.cols-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.feature { padding: 28px; display: flex; flex-direction: column; gap: 14px; }
+.feature h3 { margin-top: 6px; font-size: 19px; font-weight: 600; letter-spacing: -.02em; }
+.feature p { font-size: 15px; line-height: 1.75; color: var(--text-2); }
+.icon { display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; border-radius: 11px; border: 1px solid #26262B; background: var(--surface-2); color: var(--accent); transition: box-shadow .4s, border-color .4s; }
+.icon svg { transition: transform .6s var(--ease); }
+.feature:hover .icon { border-color: rgba(var(--accent-rgb), .5); box-shadow: 0 0 24px rgba(var(--accent-rgb), .35); }
+.feature:hover .icon svg { transform: rotate(-10deg) scale(1.12); }
 
-        /* Floating Decor Element */
-        .floating-decor {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
+/* Work bento */
+.bento { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 16px; }
+.span-2 { grid-column: span 2; }
+.span-3 { grid-column: span 3; }
+.span-4 { grid-column: span 4; }
+.work { display: flex; flex-direction: column; gap: 22px; padding: 20px; }
+.media { position: relative; border-radius: 12px; overflow: hidden; border: 1px solid var(--line); background: #0E0E10; }
+.media img { width: 100%; height: auto; object-fit: cover; transition: transform 1.2s var(--ease), filter .6s; filter: saturate(.85) brightness(.92); }
+.work:hover .media img { transform: scale(1.05); filter: none; }
+.r-wide img { aspect-ratio: 16 / 9; }
+.r-tall img { aspect-ratio: 4 / 5; }
+.r-mid img { aspect-ratio: 16 / 10; }
+.work-body { display: flex; flex-direction: column; gap: 10px; padding: 0 6px 6px; }
+.work-meta { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.chip { align-self: flex-start; padding: 4px 10px; border: 1px solid var(--border-2); border-radius: 999px; font: 400 11px/1.2 var(--mono); letter-spacing: .08em; color: var(--text-2); }
+.arrow { color: var(--text-3); transition: transform .45s var(--ease), color .3s; }
+.work:hover .arrow { transform: translate(3px, -3px); color: var(--accent); }
+.work h3 { font-size: 22px; font-weight: 600; letter-spacing: -.03em; }
+.span-4 .work h3 { font-size: 26px; }
+.work p { font-size: 15px; line-height: 1.7; color: var(--text-2); }
+.kpis { display: flex; flex-wrap: wrap; gap: 8px 24px; padding-top: 6px; font: 400 13px/1.4 var(--mono); color: var(--text-3); }
+.kpis b { font-weight: 500; color: var(--text); }
 
-        /* Spec Card */
-        .spec-card {
-            background: #151516;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: all 0.3s ease;
-        }
-        .spec-card:hover {
-            background: #1c1c1e;
-            border-color: rgba(255,255,255,0.1);
-            transform: translateY(-2px);
-        }
-    </style>
+/* Changelog：左側軌道隨捲動畫出，經過的節點會亮起 */
+#changelog { border-top: 1px solid var(--surface-2); }
+.log { position: relative; padding-left: 44px; }
+.log-rail, .log-fill { position: absolute; left: 7px; top: 6px; bottom: 6px; width: 1px; }
+.log-rail { background: var(--border); }
+.log-fill { background: linear-gradient(var(--accent), rgba(var(--accent-rgb), .25)); transform-origin: 50% 0; transform: scaleY(var(--p, 1)); }
+.motion .log-fill { --p: 0; }
+.entry { position: relative; display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 32px; padding: 32px 0; border-top: 1px solid var(--line); }
+.entry:last-child { border-bottom: 1px solid var(--line); }
+.node { position: absolute; left: -44px; top: 36px; width: 15px; height: 15px; border-radius: 50%; border: 1px solid var(--border-2); background: var(--bg); transition: background .4s, border-color .4s, box-shadow .4s; }
+.entry.lit .node, html:not(.motion) .entry .node { border-color: var(--accent); background: var(--accent); box-shadow: 0 0 0 4px rgba(var(--accent-rgb), .18), 0 0 18px rgba(var(--accent-rgb), .6); }
+.ver { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.ver-tag { padding: 3px 10px; border-radius: 6px; border: 1px solid var(--border-2); font: 500 12px/1.4 var(--mono); }
+.ver-tag.latest { border-color: var(--accent); color: var(--accent); }
+.ver-date { font: 400 13px/1 var(--mono); color: var(--text-3); }
+.entry h3 { font-size: 20px; font-weight: 600; letter-spacing: -.02em; }
+.entry h3 span { font-weight: 400; color: var(--text-3); }
+.entry-body { display: flex; flex-direction: column; gap: 10px; }
+.entry-body p { font-size: 15px; line-height: 1.75; color: var(--text-2); }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.tags span { padding: 3px 9px; border-radius: 6px; background: var(--surface-2); font: 400 12px/1.4 var(--mono); color: var(--text-2); }
+
+/* Stack */
+.cols-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.stack-card { padding: 24px; display: flex; flex-direction: column; gap: 18px; }
+.stack-card .label { font: 400 12px/1 var(--mono); letter-spacing: .1em; color: var(--text-3); }
+.stack-card ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 15px; }
+.stack-card li { display: flex; align-items: center; gap: 10px; }
+.chk path { fill: none; stroke: var(--accent); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.motion .chk path { stroke-dasharray: 22; stroke-dashoffset: 22; transition: stroke-dashoffset .7s var(--ease); transition-delay: calc(var(--d, 0ms) + 350ms + var(--i) * 140ms); }
+.motion .in .chk path { stroke-dashoffset: 0; }
+.edu { display: flex; flex-direction: column; gap: 6px; }
+.edu b { font-size: 17px; font-weight: 500; }
+.edu span { font-size: 15px; color: var(--text-2); }
+
+/* Contact：旋轉的光邊 + 磁吸按鈕 */
+.contact-card { position: relative; isolation: isolate; display: flex; flex-direction: column; align-items: center; gap: 24px; padding: clamp(56px, 8vw, 104px) clamp(20px, 5vw, 64px); border: 1px solid var(--border); border-radius: 28px; background: radial-gradient(60% 55% at 50% 0%, rgba(var(--accent-rgb), .15), transparent 70%), var(--surface); text-align: center; }
+.contact-card::before { content: ""; position: absolute; inset: -1px; border-radius: inherit; padding: 1.5px; background: conic-gradient(from var(--angle), transparent 0 52%, rgba(var(--accent-rgb), .35) 66%, #C9C1FF 80%, rgba(var(--accent-rgb), .35) 88%, transparent 96%); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; }
+.motion .contact-card::before { animation: spin 7s linear infinite; }
+@keyframes spin { to { --angle: 360deg; } }
+.contact-card .h2 { font-size: clamp(40px, 6vw, 84px); line-height: 1.02; letter-spacing: -.05em; }
+.contact-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; padding-top: 8px; }
+.contact-actions .btn { height: 54px; padding: 0 24px; }
+
+footer { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 36px 4px 40px; font-size: 13px; color: var(--text-3); }
+footer .links { display: flex; gap: 24px; }
+footer .links a:hover { color: var(--text); }
+
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .section-head { flex-direction: column; align-items: flex-start; }
+  .window-body, .cols-3, .cols-4, .bento { grid-template-columns: minmax(0, 1fr); }
+  .window-photo { min-height: 0; }
+  .window-photo img { aspect-ratio: 4 / 3; }
+  .span-2, .span-3, .span-4 { grid-column: auto; }
+  .r-tall img { aspect-ratio: 16 / 10; }
+  .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .metric:nth-child(3) { border-left: 0; }
+  .metric:nth-child(n+3) { border-top: 1px solid var(--border); }
+  .entry { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .spec { padding: 16px 20px; }
+  .spec-row { grid-template-columns: 110px minmax(0, 1fr); }
+  footer { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 520px) {
+  .metrics { grid-template-columns: minmax(0, 1fr); }
+  .metric + .metric { border-left: 0; border-top: 1px solid var(--border); }
+  .log { padding-left: 32px; }
+  .node { left: -32px; }
+}
+</style>
 </head>
-<body class="antialiased bg-black">
+<body>
 
-    <!-- Noise Overlay for Film Grain Effect -->
-    <div class="noise-overlay"></div>
+<div class="progress" aria-hidden="true"></div>
 
-    <!-- Navigation -->
-    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
-        <div class="max-w-[980px] mx-auto px-4 h-12 flex items-center justify-between text-xs font-medium tracking-wide">
-            <a href="#" class="text-white hover:text-apple-subtext transition-colors flex items-center gap-2 font-semibold text-sm">
-                Aron Song
-            </a>
-            <div class="flex space-x-6 md:space-x-8">
-                <a href="#philosophy" class="text-apple-text hover:text-apple-accent transition-colors">Philosophy</a>
-                <a href="#work" class="text-apple-text hover:text-apple-accent transition-colors">Work</a>
-                <a href="#evolution" class="text-apple-text hover:text-apple-accent transition-colors">Evolution</a>
-                <a href="#contact" class="px-3 py-1 bg-white text-black rounded-full hover:bg-gray-200 transition-colors">Contact</a>
-            </div>
-        </div>
+<div class="nav-shell">
+  <header class="nav" id="nav">
+    <a class="brand" href="#top" aria-label="Aron Song，回到頂端">
+      <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><rect x=".5" y=".5" width="31" height="31" rx="9" fill="#151518" stroke="#2C2C31"/><path class="logo-a" d="M8.5 23 15 9l6.5 14"/><path class="logo-bar" d="M11.6 17.5H25"/></svg>
+      Aron Song
+    </a>
+    <nav class="nav-links" aria-label="主要導覽">
+      <span class="nav-pill" aria-hidden="true"></span>
+      <a href="#approach">方法</a>
+      <a href="#work">作品</a>
+      <a href="#changelog">更新紀錄</a>
+      <a href="#stack">能力</a>
     </nav>
+    <a class="btn btn-primary nav-cta" href="#contact" data-magnetic>聯絡我</a>
+  </header>
+</div>
 
-    <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center justify-center pt-20 pb-10 overflow-hidden">
-        <!-- Background Elements -->
-        <div class="absolute inset-0 bg-grid pointer-events-none"></div>
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[800px] bg-blue-900/10 rounded-full blur-[100px] pointer-events-none"></div>
-        
-        <!-- Floating Decorative Elements (Abstract Tech) -->
-        <div class="absolute top-1/4 left-10 md:left-1/4 w-24 h-32 floating-decor rounded-xl rotate-[-15deg] animate-float pointer-events-none hidden lg:block"></div>
-        <div class="absolute bottom-1/4 right-10 w-16 h-16 floating-decor rounded-lg rotate-[10deg] animate-float-delayed pointer-events-none opacity-50 hidden lg:block"></div>
+<main id="top">
 
-        <div class="max-w-[1100px] mx-auto px-6 w-full z-10">
-            <div class="flex flex-col-reverse md:flex-row items-center justify-between gap-12">
-                
-                <!-- Left: Text -->
-                <div class="flex-1 text-center md:text-left fade-in-up delay-100 relative">
-                    <!-- Eyebrow Label -->
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 mb-6 backdrop-blur-sm">
-                        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-                        <span class="text-xs font-medium text-apple-subtext tracking-wider uppercase">Open to Opportunities</span>
-                    </div>
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <div class="hero-grid" aria-hidden="true"></div>
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="wrap">
+      <span class="badge" data-intro style="--d: 100ms"><span class="dot"></span>Open to opportunities<span class="sep"></span>Web3 · FinTech · AI</span>
+      <h1 data-split data-hero style="--base: 250ms">Beyond logic.<br><span class="dim">Pure intuition.</span></h1>
+      <p class="lede" data-intro style="--d: 750ms">從複雜的代碼到直觀的產品體驗。13 年 Web3 與 AI 領域的極致探索，專注於 0 到 1 的架構設計與商業落地。</p>
+      <div class="hero-ctas" data-intro style="--d: 900ms">
+        <a class="btn btn-primary" href="#work" data-magnetic>查看作品<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn-ghost" href="https://www.cake.me/resumes/songpu717" target="_blank" rel="noopener" data-magnetic>查看履歷<svg class="ne" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+      </div>
 
-                    <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 leading-[1.1]">
-                        <span class="block text-white">Beyond Logic.</span>
-                        <span class="block text-gradient">Pure Intuition.</span>
-                    </h1>
-                    <p class="text-xl text-apple-subtext max-w-lg mx-auto md:mx-0 leading-relaxed mb-8">
-                        從複雜的代碼到直觀的產品體驗。<br>
-                        13 年 Web3 與 AI 領域的極致探索，專注於 0 到 1 的架構設計與商業落地。
-                    </p>
-                    
-                    <div class="flex flex-col sm:flex-row justify-center md:justify-start gap-4 mb-12">
-                        <a href="#work" class="px-8 py-3 bg-apple-accent hover:bg-blue-500 text-white rounded-full text-lg font-medium transition-all transform hover:scale-105 shadow-lg shadow-blue-900/30">
-                            View Projects
-                        </a>
-                        <a href="https://www.cake.me/resumes/songpu717" target="_blank" class="px-8 py-3 bg-[#1d1d1f] hover:bg-[#2c2c2e] text-apple-accent rounded-full text-lg font-medium transition-all flex items-center justify-center gap-2 border border-white/10">
-                            Resume <i class="fas fa-arrow-right text-sm"></i>
-                        </a>
-                    </div>
+      <div class="stage" data-intro style="--d: 650ms">
+        <div class="window">
+          <div class="window-bar">
+            <i></i><i></i><i></i>
+            <span class="window-title"><span class="typing" data-text="aronsong / profile">aronsong / profile</span><span class="caret" aria-hidden="true"></span></span>
+            <span style="width: 46px"></span>
+          </div>
+          <div class="window-body">
+            <div class="window-photo"><img src="img/profile.jpg" alt="Aron Song 的肖像" width="1388" height="1400"></div>
+            <dl class="spec">
+              <div class="spec-row" style="--i: 0"><dt>ROLE</dt><dd>Product Architect · 產品架構師</dd></div>
+              <div class="spec-row" style="--i: 1"><dt>EXPERIENCE</dt><dd>13 年 · Since 2012</dd></div>
+              <div class="spec-row" style="--i: 2"><dt>DOMAINS</dt><dd>Web3 FinTech · AI MedTech</dd></div>
+              <div class="spec-row" style="--i: 3"><dt>TRACK RECORD</dt><dd>$10B+ 交易額 · 1000x 槓桿風控</dd></div>
+              <div class="spec-row" style="--i: 4"><dt>SPECIALTY</dt><dd>0 → 1 架構設計與商業落地</dd></div>
+              <div class="spec-row" style="--i: 5"><dt>BASED</dt><dd>Taipei 台北</dd></div>
+              <div class="spec-row" style="--i: 6"><dt>STATUS</dt><dd><span class="dot"></span>Open to opportunities</dd></div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-                    <!-- Core Focus Tags (To fill space and add info) -->
-                    <div class="pt-8 border-t border-white/10 flex flex-wrap justify-center md:justify-start gap-x-8 gap-y-3">
-                        <div class="flex items-center gap-2 text-xs font-semibold tracking-widest text-apple-subtext">
-                            <i class="fas fa-wand-magic-sparkles text-apple-accent"></i> VIBE CODING
-                        </div>
-                        <div class="flex items-center gap-2 text-xs font-semibold tracking-widest text-apple-subtext">
-                            <i class="fas fa-layer-group text-apple-accent"></i> WEB3 STRATEGY
-                        </div>
-                        <div class="flex items-center gap-2 text-xs font-semibold tracking-widest text-apple-subtext">
-                            <i class="fas fa-robot text-apple-accent"></i> AI PRODUCT
-                        </div>
-                        <div class="flex items-center gap-2 text-xs font-semibold tracking-widest text-apple-subtext">
-                            <i class="fas fa-chart-pie text-apple-accent"></i> DEFI LOGIC
-                        </div>
-                    </div>
-                </div>
+  <!-- Teams + metrics -->
+  <section class="wrap">
+    <div class="teams" data-reveal>
+      <span class="teams-label">曾任職的團隊</span>
+      <div class="marquee">
+        <div class="track">
+          <div class="group"><span>亞太滿譽科技</span><span>上海分布信息科技</span><span>原始空氣科技</span><span>海納醫信</span><span>宏元富成</span><span>四川宏力</span></div>
+          <div class="group" aria-hidden="true"><span>亞太滿譽科技</span><span>上海分布信息科技</span><span>原始空氣科技</span><span>海納醫信</span><span>宏元富成</span><span>四川宏力</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="metrics" data-reveal="scale">
+      <div class="metric" style="--d: 0ms"><span class="metric-label">VOLUME</span><span class="metric-num">$<span data-count="10">10</span>B+</span><p>經手百億級美金的金融產品</p></div>
+      <div class="metric" style="--d: 120ms"><span class="metric-label">EXPERIENCE</span><span class="metric-num"><span data-count="13">13</span><small>年</small></span><p>從全端工程到產品架構</p></div>
+      <div class="metric" style="--d: 240ms"><span class="metric-label">LEVERAGE</span><span class="metric-num"><span data-count="1000">1000</span>x</span><p>合約槓桿風控模型</p></div>
+      <div class="metric" style="--d: 360ms"><span class="metric-label">HASHRATE</span><span class="metric-num"><span data-count="28">28</span>%</span><p>整合全網算力的礦池生態</p></div>
+    </div>
+  </section>
 
-                <!-- Right: Photo (Optimized) -->
-                <div class="flex-1 flex justify-center md:justify-end fade-in-up">
-                    <div class="relative w-48 h-48 md:w-64 md:h-64 animate-float">
-                        <div class="profile-glow"></div>
-                        <div class="profile-container w-full h-full rounded-full overflow-hidden border border-[#333] shadow-2xl relative z-10 bg-[#1c1c1e]">
-                            <img src="https://img.cake.me/cdn-cgi/image/fit=scale-down,format=auto,w=1920/https://images.cakeresume.com/kzwNA/songpu717/27cf51d5-7b7f-47a4-bcfe-06b40a97d5e6.png" 
-                                 alt="Aron Song" 
-                                 class="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity duration-700">
-                        </div>
-                        <!-- Badges -->
-                        <div class="absolute top-6 -right-4 bg-[#1c1c1e]/80 backdrop-blur border border-white/5 px-3 py-1.5 rounded-xl shadow-xl z-20 animate-pulse-slow">
-                            <div class="flex items-center gap-2">
-                                <i class="fas fa-rocket text-apple-accent text-xs"></i>
-                                <span class="text-xs font-bold text-white">0-to-1</span>
-                            </div>
-                        </div>
-                        <div class="absolute bottom-6 -left-4 bg-[#1c1c1e]/80 backdrop-blur border border-white/5 px-3 py-1.5 rounded-xl shadow-xl z-20 animate-pulse-slow" style="animation-delay: 2s;">
-                            <div class="flex items-center gap-2">
-                                <i class="fas fa-chart-line text-green-400 text-xs"></i>
-                                <span class="text-xs font-bold text-white">$10B+</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  <!-- Approach -->
+  <section class="section" id="approach">
+    <div class="wrap">
+      <div class="approach-head">
+        <span class="eyebrow" data-reveal>APPROACH</span>
+        <h2 class="h2" data-split>不僅是管理產品，<br><span class="dim">更是設計商業生態系統。</span></h2>
+      </div>
+      <div class="cols-3">
+        <div data-reveal style="--d: 0ms"><div class="card feature">
+          <span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></svg></span>
+          <h3>INTJ-A 架構師</h3>
+          <p>以前瞻性思維構建系統。不只解決當下的痛點，更預判未來的規模化挑戰。</p>
+        </div></div>
+        <div data-reveal style="--d: 120ms"><div class="card feature">
+          <span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></span>
+          <h3>Vibe Coding 實踐者</h3>
+          <p>善用 AI 協作開發。透過自然語言與 LLM 共舞，快速驗證產品「感覺」，實現 10x 開發效率。</p>
+        </div></div>
+        <div data-reveal style="--d: 240ms"><div class="card feature">
+          <span class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18M6 16l4-5 3 3 5-7"/></svg></span>
+          <h3>$10B+ 交易額</h3>
+          <p>經手百億級美金的金融產品。對數字敏感，對風控嚴謹，確保商業可持續性。</p>
+        </div></div>
+      </div>
+    </div>
+  </section>
 
+  <!-- Work -->
+  <section class="section" id="work" style="padding-top: 0">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow" data-reveal>SELECTED WORK</span>
+          <h2 class="h2" data-split>精選作品</h2>
+        </div>
+        <p class="lede" data-reveal style="--d: 150ms">融合 Web3 金融科技與 AI 智慧醫療，打造定義未來的產品體驗。</p>
+      </div>
+
+      <div class="bento">
+        <div class="span-4" data-reveal style="--d: 0ms">
+          <a class="card work" href="https://www.cake.me/portfolios/301cb0" target="_blank" rel="noopener">
+            <div class="media r-wide"><img src="img/topone.jpg" alt="Top.one 交易所首頁：黃黑配色的 Top.one 大字標" width="1400" height="860" loading="lazy" decoding="async"></div>
+            <div class="work-body">
+              <div class="work-meta"><span class="chip">FINTECH · FLAGSHIP</span><svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></div>
+              <h3>Top.one Exchange</h3>
+              <p>定義極致的高槓桿合約體驗。整合智能做市機器人與 1000x 槓桿風控模型。</p>
+              <div class="kpis"><span><b>1000x</b> max leverage</span><span><b>Scrum</b> agile</span></div>
             </div>
+          </a>
         </div>
-        
-        <!-- Scroll Indicator -->
-        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce opacity-30">
-            <i class="fas fa-chevron-down text-white text-xl"></i>
-        </div>
-    </section>
-
-    <!-- Philosophy Section -->
-    <section id="philosophy" class="py-32 bg-black relative overflow-hidden">
-        <!-- Decorative Background Blur -->
-        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-900/10 rounded-full blur-[120px] pointer-events-none"></div>
-        <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-900/10 rounded-full blur-[120px] pointer-events-none"></div>
-
-        <div class="max-w-[980px] mx-auto px-6 relative z-10">
-            <h2 class="text-4xl md:text-6xl font-bold leading-tight text-white mb-16 fade-in-up">
-                不僅是管理產品，<br>
-                <span class="text-apple-subtext">更是設計商業生態系統。</span>
-            </h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Card 1 -->
-                <div class="glass-card-light p-8 rounded-3xl fade-in-up delay-100 group hover:bg-[#2c2c2e] transition-colors duration-500">
-                    <div class="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 border border-white/5">
-                        <i class="fas fa-brain text-2xl text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-2">INTJ-A 架構師</h3>
-                    <p class="text-apple-subtext text-sm leading-relaxed">
-                        以前瞻性思維構建系統。不只解決當下的痛點，更預判未來的規模化挑戰。
-                    </p>
-                </div>
-
-                <!-- Card 2: Vibe Coding -->
-                <div class="glass-card-light p-8 rounded-3xl fade-in-up delay-200 group hover:bg-[#2c2c2e] transition-colors duration-500">
-                    <div class="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 border border-white/5">
-                        <i class="fas fa-bolt text-2xl text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-2">Vibe Coding 實踐者</h3>
-                    <p class="text-apple-subtext text-sm leading-relaxed">
-                        善用 AI 協作開發。不寫繁瑣代碼，而是透過自然語言與 LLM 共舞，快速驗證產品「感覺」，實現 10x 開發效率。
-                    </p>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="glass-card-light p-8 rounded-3xl fade-in-up delay-300 group hover:bg-[#2c2c2e] transition-colors duration-500 border border-blue-500/20">
-                    <div class="w-14 h-14 bg-blue-600/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 border border-blue-500/20">
-                        <i class="fas fa-chart-line text-2xl text-blue-400"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-1">$10B+ 交易額</h3>
-                    <p class="text-xs text-blue-400 font-mono mb-3 uppercase tracking-widest">Proven Track Record</p>
-                    <p class="text-apple-subtext text-sm leading-relaxed">
-                        經手百億級美金的金融產品。對數字敏感，對風控嚴謹，確保商業可持續性。
-                    </p>
-                </div>
+        <div class="span-2" data-reveal style="--d: 120ms">
+          <a class="card work" href="https://www.cake.me/portfolios/seeker-d6a71d" target="_blank" rel="noopener">
+            <div class="media r-tall"><img src="img/seeker.jpg" alt="Seeker Browser 錢包介面：資產總覽與多鏈資產列表" width="1400" height="788" style="object-position: left top" loading="lazy" decoding="async"></div>
+            <div class="work-body">
+              <div class="work-meta"><span class="chip">WEB3 · INFRA</span><svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></div>
+              <h3>Seeker Browser</h3>
+              <p>Web3 世界的統一入口。集成多鏈錢包、DApp 與分布式存儲。</p>
             </div>
+          </a>
         </div>
-    </section>
-
-    <!-- Selected Works Section -->
-    <section id="work" class="py-20 bg-[#050507]">
-        <div class="max-w-[1200px] mx-auto px-6">
-            <div class="mb-16 fade-in-up flex flex-col md:flex-row md:items-end md:justify-between">
-                <div>
-                    <h2 class="text-3xl md:text-5xl font-bold text-white mb-4">Selected Works.</h2>
-                    <p class="text-2xl text-white font-medium mb-2">Defying expectations.</p>
-                    <p class="text-apple-subtext text-lg max-w-2xl leading-relaxed">
-                        融合 Web3 金融科技與 AI 智慧醫療，打造定義未來的產品體驗。
-                    </p>
-                </div>
+        <div class="span-2" data-reveal style="--d: 0ms">
+          <a class="card work" href="https://www.cake.me/portfolios/e108d7" target="_blank" rel="noopener">
+            <div class="media r-tall"><img src="img/medical.jpg" alt="AI 醫療影像平台：血管 3D 重建與多視窗影像" width="1400" height="724" style="object-position: 60% center" loading="lazy" decoding="async"></div>
+            <div class="work-body">
+              <div class="work-meta"><span class="chip">AI · MEDTECH</span><svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></div>
+              <h3>AI Medical Imaging</h3>
+              <p>拯救生命的設計。整合 AI 肺結節偵測與 PACS 系統，縮短 50% 診療時間。</p>
             </div>
-
-            <!-- Grid Container -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                
-                <!-- Project 1: Top.one (Real Image Used) -->
-                <div class="bento-card md:col-span-2 bg-gray-900 h-[450px] lg:h-[550px] fade-in-up delay-100 group">
-                    <div class="absolute inset-0">
-                        <img src="https://img.cake.me/cdn-cgi/image/fit=scale-down,format=auto,w=1920/https://images.cakeresume.com/kzwNA/songpu717/3cb40a7b-48b4-48c1-93f0-cf3e014356ee.png" 
-                             class="w-full h-full object-cover portfolio-img" 
-                             alt="Top.one Interface">
-                        <!-- Stronger gradient for text readability -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent pointer-events-none"></div>
-                    </div>
-                    <div class="relative z-10 p-8 lg:p-12 flex flex-col h-full justify-end">
-                        <div class="flex items-center gap-3 mb-2">
-                             <span class="px-3 py-1 bg-blue-600/30 border border-blue-500/30 backdrop-blur-md text-blue-400 text-xs font-bold rounded-full uppercase tracking-wider">Flagship</span>
-                             <span class="px-3 py-1 bg-white/10 border border-white/10 backdrop-blur-md text-white text-xs font-bold rounded-full uppercase tracking-wider">FinTech</span>
-                        </div>
-                        <h3 class="text-3xl lg:text-4xl font-bold text-white mb-2 drop-shadow-md">Top.one Exchange</h3>
-                        <p class="text-gray-300 text-base lg:text-lg max-w-lg mb-6 drop-shadow-sm">
-                            定義極致的高槓桿合約體驗。整合智能做市機器人與 1000x 槓桿風控模型。
-                        </p>
-                         <div class="flex flex-wrap items-end justify-between gap-4 border-t border-white/10 pt-6">
-                             <div class="flex gap-6">
-                                 <div class="flex flex-col">
-                                     <span class="text-xl lg:text-2xl font-bold text-white">1000x</span>
-                                     <span class="text-xs text-gray-400 uppercase tracking-wide">Max Leverage</span>
-                                 </div>
-                                 <div class="flex flex-col">
-                                     <span class="text-xl lg:text-2xl font-bold text-white">Scrum</span>
-                                     <span class="text-xs text-gray-400 uppercase tracking-wide">Agile</span>
-                                 </div>
-                             </div>
-                             <a href="https://www.cake.me/portfolios/301cb0" target="_blank" class="inline-flex items-center px-5 py-2 rounded-full bg-white text-black font-medium hover:bg-gray-200 transition-colors text-sm z-20">
-                                View Case Study <i class="fas fa-arrow-right ml-2 text-xs"></i>
-                             </a>
-                         </div>
-                    </div>
-                </div>
-
-                <!-- Project 2: Seeker (Real Image Used) -->
-                <div class="bento-card bg-[#151516] h-[450px] lg:h-[550px] flex flex-col fade-in-up delay-200 group">
-                    <div class="h-[55%] relative overflow-hidden bg-[#1c1c1e]">
-                         <img src="https://img.cake.me/cdn-cgi/image/fit=scale-down,format=auto,w=1920/https://images.cakeresume.com/kzwNA/songpu717/7ed19eb2-dec8-46af-9a06-4d13e7f2724e.png" 
-                              class="w-full h-full object-cover object-top portfolio-img" 
-                              alt="Seeker Browser">
-                         <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#151516] pointer-events-none"></div>
-                    </div>
-                    <div class="p-8 flex-grow flex flex-col justify-center relative z-10">
-                        <div class="mb-3">
-                            <span class="px-2 py-1 bg-white/5 border border-white/10 text-apple-subtext text-[10px] font-bold rounded uppercase tracking-wider">Infrastructure</span>
-                        </div>
-                        <h3 class="text-2xl font-bold text-white mb-2">Seeker Browser</h3>
-                        <p class="text-apple-subtext text-sm mb-6">
-                            Web3 世界的統一入口。集成多鏈錢包、DApp 與分布式存儲。
-                        </p>
-                        <a href="https://www.cake.me/portfolios/seeker-d6a71d" target="_blank" class="inline-flex items-center text-apple-accent hover:text-white transition-colors text-sm font-medium mt-auto z-20">
-                            View Case Study <i class="fas fa-chevron-right ml-1 text-xs"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Project 3: AI Medical (Real Image Used) -->
-                <div class="bento-card bg-[#151516] h-[450px] lg:h-[550px] flex flex-col fade-in-up delay-300 group">
-                    <div class="h-[60%] relative overflow-hidden p-0">
-                        <img src="https://img.cake.me/cdn-cgi/image/fit=scale-down,format=auto,w=1920/https://images.cakeresume.com/kzwNA/songpu717/99c39ce0-b2df-49a8-9b10-13d4da9f5d2a.png" 
-                             class="w-full h-full object-cover portfolio-img" 
-                             alt="AI Medical">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#151516] via-[#151516]/50 to-transparent pointer-events-none"></div>
-                    </div>
-                    <div class="p-8 -mt-10 relative z-10 flex-grow flex flex-col">
-                         <div class="mb-3">
-                            <span class="px-2 py-1 bg-white/5 border border-white/10 text-apple-subtext text-[10px] font-bold rounded uppercase tracking-wider">AI / MedTech</span>
-                        </div>
-                        <h3 class="text-2xl font-bold text-white mb-2">AI Medical Imaging</h3>
-                        <p class="text-apple-subtext text-sm mb-6">
-                            拯救生命的設計。整合 AI 肺結節偵測與 PACS 系統，縮短 50% 診療時間。
-                        </p>
-                        <a href="https://www.cake.me/portfolios/e108d7" target="_blank" class="inline-flex items-center text-apple-accent hover:text-white transition-colors text-sm font-medium mt-auto z-20">
-                            View Case Study <i class="fas fa-chevron-right ml-1 text-xs"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Project 4: Bi.top (Real Image Used) -->
-                <div class="bento-card md:col-span-2 lg:col-span-2 bg-gray-900 h-[400px] lg:h-[500px] flex items-center overflow-hidden fade-in-up delay-400 group">
-                    <div class="absolute right-0 top-0 w-2/3 h-full hidden md:block">
-                        <img src="https://img.cake.me/cdn-cgi/image/fit=scale-down,format=auto,w=1920/https://images.cakeresume.com/kzwNA/songpu717/f9de2548-87ae-4e88-97ec-e17de163b889.png" 
-                             class="w-full h-full object-cover portfolio-img" 
-                             style="mask-image: linear-gradient(to right, transparent, black 30%); -webkit-mask-image: linear-gradient(to right, transparent, black 30%);"
-                             alt="Bi.top Ecosystem">
-                    </div>
-                    <div class="p-8 lg:p-12 relative z-10 w-full md:w-2/3">
-                        <div class="mb-4">
-                            <i class="fab fa-bitcoin text-4xl text-yellow-500 mb-4 block"></i>
-                        </div>
-                        <h3 class="text-3xl font-bold text-white mb-2">Bi.top Ecosystem</h3>
-                        <p class="text-gray-400 text-base mb-8 max-w-md">
-                            全球首創「礦池 + 交易」生態閉環。整合 28% 全網算力，從 0 到 1 打造獲千萬美元融資的平台。
-                        </p>
-                        <a href="https://www.cake.me/portfolios/301cb0" target="_blank" class="px-6 py-3 bg-white/10 hover:bg-white/20 backdrop-blur text-white rounded-full text-sm font-medium transition-colors border border-white/10 z-20">
-                            Explore Ecosystem
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Project 5: Daybreak (Case Study) -->
-                <a href="daybreak/" class="bento-card md:col-span-2 lg:col-span-3 bg-[#0C0C0D] h-[400px] flex flex-row overflow-hidden fade-in-up delay-500 group border border-white/5 block">
-                    <!-- Left Content -->
-                    <div class="p-8 lg:p-12 relative z-10 w-full md:w-1/2 flex flex-col justify-center h-full">
-                        <div class="mb-4">
-                            <span class="px-3 py-1 text-xs font-bold rounded-full uppercase tracking-wider" style="background:rgba(255,74,46,.14);border:1px solid rgba(255,74,46,.35);color:#FF6A50">Case Study · BTC</span>
-                        </div>
-                        <h3 class="text-3xl font-bold text-white mb-2">Daybreak 破曉</h3>
-                        <p class="text-gray-400 text-base mb-6">
-                            把 15 個免費資料源，變成每天台北 08:30 出刊、會自己追蹤對錯的比特幣簡報。程式算數字、AI 只寫判讀、出場規則寫死；公開以來每天準時出刊，資料與主機成本 $0。
-                        </p>
-                        <span class="inline-flex items-center text-sm font-medium z-20" style="color:#FF6A50">
-                            Read Case Study <i class="fas fa-arrow-right ml-2 text-xs"></i>
-                        </span>
-                    </div>
-                    <!-- Right Image -->
-                    <div class="absolute right-0 top-0 w-1/2 h-full hidden md:block">
-                        <img src="daybreak/img/card.jpg"
-                             class="w-full h-full object-cover portfolio-img"
-                             style="object-position:center 20%; mask-image: linear-gradient(to right, transparent, black 20%); -webkit-mask-image: linear-gradient(to right, transparent, black 20%);"
-                             alt="Daybreak 頭版：號外標題與超大的比特幣收盤價 81,086" loading="lazy">
-                        <div class="absolute inset-0 bg-gradient-to-l from-transparent via-[#0C0C0D]/20 to-[#0C0C0D] pointer-events-none"></div>
-                    </div>
-                </a>
-
-                <!-- Project 6: OneStroke (Case Study) -->
-                <a href="onestroke/" class="bento-card md:col-span-2 lg:col-span-3 bg-[#0F100F] h-[400px] flex flex-row overflow-hidden fade-in-up delay-500 group border border-white/5 block">
-                    <!-- Left Content -->
-                    <div class="p-8 lg:p-12 relative z-10 w-full md:w-1/2 flex flex-col justify-center h-full">
-                        <div class="mb-4">
-                            <span class="px-3 py-1 text-xs font-bold rounded-full uppercase tracking-wider" style="background:rgba(215,250,76,.14);border:1px solid rgba(215,250,76,.35);color:#D7FA4C">Case Study · AI</span>
-                        </div>
-                        <h3 class="text-3xl font-bold text-white mb-2">OneStroke 一拍</h3>
-                        <p class="text-gray-400 text-base mb-6">
-                            用一段手機影片看懂每一拍的網球揮拍分析產品。自動切出每一拍、0–100 評分、3D 人體還原、像教練一樣診斷並給練習方案；5 天從需求到可試賣的版本。
-                        </p>
-                        <span class="inline-flex items-center text-sm font-medium z-20" style="color:#D7FA4C">
-                            Read Case Study <i class="fas fa-arrow-right ml-2 text-xs"></i>
-                        </span>
-                    </div>
-                    <!-- Right Image -->
-                    <div class="absolute right-0 top-0 w-1/2 h-full hidden md:block">
-                        <img src="onestroke/img/card.jpg"
-                             class="w-full h-full object-cover portfolio-img"
-                             style="object-position:center 12%; mask-image: linear-gradient(to right, transparent, black 20%); -webkit-mask-image: linear-gradient(to right, transparent, black 20%);"
-                             alt="OneStroke：網球揮拍者被還原成 3D 人體，揮拍軌跡是一道萊姆綠光帶" loading="lazy">
-                        <div class="absolute inset-0 bg-gradient-to-l from-transparent via-[#0F100F]/20 to-[#0F100F] pointer-events-none"></div>
-                    </div>
-                </a>
-
+          </a>
+        </div>
+        <div class="span-4" data-reveal style="--d: 120ms">
+          <a class="card work" href="https://www.cake.me/portfolios/301cb0" target="_blank" rel="noopener">
+            <div class="media r-wide"><img src="img/bitop.jpg" alt="Bi.top 交易平台首頁：全球首家自助上幣" width="1400" height="740" loading="lazy" decoding="async"></div>
+            <div class="work-body">
+              <div class="work-meta"><span class="chip">FINTECH · 0 → 1</span><svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></div>
+              <h3>Bi.top Ecosystem</h3>
+              <p>全球首創「礦池 + 交易」生態閉環。整合 28% 全網算力，從 0 到 1 打造獲千萬美元融資的平台。</p>
+              <div class="kpis"><span><b>28%</b> network hashrate</span><span><b>0 → 1</b> founding team</span></div>
             </div>
+          </a>
         </div>
-    </section>
-
-    <!-- Evolution Section -->
-    <section id="evolution" class="py-32 bg-black">
-        <div class="max-w-[980px] mx-auto px-6">
-            <h2 class="text-4xl md:text-5xl font-bold text-white mb-20 text-center fade-in-up">Evolution.</h2>
-            
-            <div class="relative border-l border-apple-border/50 ml-4 md:ml-0 md:pl-0 space-y-20">
-                
-                <!-- Item 1 -->
-                <div class="relative md:grid md:grid-cols-5 gap-8 group fade-in-up">
-                    <div class="md:col-span-1 md:text-right pt-1">
-                        <span class="text-2xl font-bold text-white block">v.5.0</span>
-                        <span class="text-sm text-apple-subtext font-mono">2023-2025</span>
-                    </div>
-                    <div class="hidden md:block absolute left-[20%] top-2 w-3 h-3 bg-gray-600 rounded-full -ml-[7px] ring-4 ring-black bg-white shadow-[0_0_10px_rgba(255,255,255,0.5)]"></div>
-                    <div class="md:col-span-4 pl-8 md:pl-0">
-                        <h3 class="text-2xl font-bold text-white group-hover:text-white transition-colors">Product Manager</h3>
-                        <p class="text-apple-subtext mb-4">亞太滿譽科技有限公司</p>
-                        
-                        <div class="flex gap-2 mb-4">
-                            <span class="px-2 py-1 bg-white/10 rounded text-xs text-white">Exchange Core</span>
-                            <span class="px-2 py-1 bg-white/10 rounded text-xs text-white">Risk Control</span>
-                        </div>
-
-                        <p class="text-gray-400 leading-relaxed mb-4">
-                            專注於高槓桿合約交易的核心架構。將複雜的做市策略與風控模型轉化為直觀的用戶產品。
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Item 2 -->
-                <div class="relative md:grid md:grid-cols-5 gap-8 group fade-in-up delay-100">
-                    <div class="md:col-span-1 md:text-right pt-1">
-                        <span class="text-2xl font-bold text-white block">v.4.0</span>
-                        <span class="text-sm text-apple-subtext font-mono">2019-2023</span>
-                    </div>
-                    <div class="hidden md:block absolute left-[20%] top-2 w-3 h-3 bg-gray-600 rounded-full -ml-[7px] ring-4 ring-black"></div>
-                    <div class="md:col-span-4 pl-8 md:pl-0">
-                        <h3 class="text-2xl font-bold text-white group-hover:text-white transition-colors">Web3 Product Lead</h3>
-                        <p class="text-apple-subtext mb-4">上海分布信息科技</p>
-                        
-                         <div class="flex gap-2 mb-4">
-                            <span class="px-2 py-1 bg-white/10 rounded text-xs text-white">DeFi</span>
-                            <span class="px-2 py-1 bg-white/10 rounded text-xs text-white">Blockchain Browser</span>
-                            <span class="px-2 py-1 bg-white/10 rounded text-xs text-white">Wallet</span>
-                        </div>
-
-                        <p class="text-gray-400 leading-relaxed">
-                            定義去中心化存儲的標準。從瀏覽器到錢包，構建完整的 Web3 基礎設施生態。
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Item 3 -->
-                <div class="relative md:grid md:grid-cols-5 gap-8 group fade-in-up delay-200">
-                    <div class="md:col-span-1 md:text-right pt-1">
-                        <span class="text-2xl font-bold text-white block">v.3.0</span>
-                        <span class="text-sm text-apple-subtext font-mono">2018-2019</span>
-                    </div>
-                    <div class="hidden md:block absolute left-[20%] top-2 w-3 h-3 bg-gray-600 rounded-full -ml-[7px] ring-4 ring-black"></div>
-                    <div class="md:col-span-4 pl-8 md:pl-0">
-                        <h3 class="text-2xl font-bold text-white">Exchange PM</h3>
-                        <p class="text-apple-subtext mb-4">原始空氣科技</p>
-                        
-                        <div class="flex gap-2 mb-4">
-                            <span class="px-2 py-1 bg-white/10 rounded text-xs text-white">0-to-1</span>
-                            <span class="px-2 py-1 bg-white/10 rounded text-xs text-white">Mining Pool</span>
-                        </div>
-
-                        <p class="text-gray-400 leading-relaxed">
-                            0 到 1 打造 Bi.top。結合礦業資源與交易平台，實現資源最大化利用。
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Item 4 -->
-                <div class="relative md:grid md:grid-cols-5 gap-8 group fade-in-up delay-300">
-                    <div class="md:col-span-1 md:text-right pt-1">
-                        <span class="text-2xl font-bold text-white block">v.2.0</span>
-                        <span class="text-sm text-apple-subtext font-mono">2016-2018</span>
-                    </div>
-                    <div class="hidden md:block absolute left-[20%] top-2 w-3 h-3 bg-gray-600 rounded-full -ml-[7px] ring-4 ring-black"></div>
-                    <div class="md:col-span-4 pl-8 md:pl-0">
-                        <h3 class="text-2xl font-bold text-white">AI Healthcare PM</h3>
-                        <p class="text-apple-subtext mb-4">海納醫信</p>
-                        
-                        <div class="flex gap-2 mb-4">
-                            <span class="px-2 py-1 bg-white/10 rounded text-xs text-white">AI Diagnostic</span>
-                            <span class="px-2 py-1 bg-white/10 rounded text-xs text-white">PACS</span>
-                        </div>
-
-                        <p class="text-gray-400 leading-relaxed">
-                            將 AI 引入臨床流程。不僅是技術落地，更解決了醫生實際工作流中的痛點。
-                        </p>
-                    </div>
-                </div>
-
-                 <!-- Item 5 -->
-                 <div class="relative md:grid md:grid-cols-5 gap-8 group fade-in-up delay-400 opacity-50 hover:opacity-100 transition-opacity">
-                    <div class="md:col-span-1 md:text-right pt-1">
-                        <span class="text-2xl font-bold text-white block">Origin</span>
-                        <span class="text-sm text-apple-subtext font-mono">2012-2016</span>
-                    </div>
-                    <div class="hidden md:block absolute left-[20%] top-2 w-3 h-3 bg-gray-800 rounded-full -ml-[7px] ring-4 ring-black"></div>
-                    <div class="md:col-span-4 pl-8 md:pl-0">
-                        <h3 class="text-2xl font-bold text-white">Software Engineer</h3>
-                        <p class="text-apple-subtext mb-2">宏元富成 / 四川宏力</p>
-                        <p class="text-gray-400 leading-relaxed">
-                            Code is the foundation. 全端開發經驗，奠定了對技術可行性的精準判斷。
-                        </p>
-                    </div>
-                </div>
+        <div class="span-3" data-reveal style="--d: 0ms">
+          <a class="card work" href="daybreak/">
+            <div class="media r-mid"><img src="daybreak/img/card.jpg" alt="Daybreak 夜刊頭版：號外標題與超大的比特幣收盤價" width="1186" height="933" style="object-position: left top" loading="lazy" decoding="async"></div>
+            <div class="work-body">
+              <div class="work-meta"><span class="chip">CASE STUDY · BTC</span><svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+              <h3>Daybreak 破曉</h3>
+              <p>把 15 個免費資料源，變成每天台北 08:30 出刊、會自己追蹤對錯的比特幣簡報。程式算數字、AI 只寫判讀；資料與主機成本 $0。</p>
             </div>
+          </a>
         </div>
-    </section>
-
-    <!-- Tech Specs (Redesigned as Spec Cards) -->
-    <section class="py-32 bg-[#0a0a0a] border-t border-white/5">
-        <div class="max-w-[980px] mx-auto px-6">
-            <h2 class="text-3xl font-bold text-white mb-16 fade-in-up">Technical Specifications</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                
-                <!-- Spec Card 1 -->
-                <div class="spec-card p-6 rounded-2xl fade-in-up delay-100">
-                    <div class="w-10 h-10 bg-blue-900/20 rounded-lg flex items-center justify-center mb-4 text-blue-400">
-                        <i class="fas fa-chess-knight"></i>
-                    </div>
-                    <h4 class="text-white font-bold mb-2">Core Strategy</h4>
-                    <div class="text-apple-subtext text-sm space-y-1">
-                        <p>0-1 Product Lifecycle</p>
-                        <p>Agile / Scrum</p>
-                        <p>Data-Driven Growth</p>
-                    </div>
-                </div>
-
-                <!-- Spec Card 2 -->
-                <div class="spec-card p-6 rounded-2xl fade-in-up delay-200">
-                    <div class="w-10 h-10 bg-purple-900/20 rounded-lg flex items-center justify-center mb-4 text-purple-400">
-                        <i class="fas fa-cubes"></i>
-                    </div>
-                    <h4 class="text-white font-bold mb-2">Web3 Tech</h4>
-                    <div class="text-apple-subtext text-sm space-y-1">
-                        <p>DeFi / Tokenomics</p>
-                        <p>Smart Contract Logic</p>
-                        <p>Wallet Security</p>
-                    </div>
-                </div>
-
-                <!-- Spec Card 3: AI & Vibe Coding -->
-                <div class="spec-card p-6 rounded-2xl fade-in-up delay-300">
-                    <div class="w-10 h-10 bg-green-900/20 rounded-lg flex items-center justify-center mb-4 text-green-400">
-                        <i class="fas fa-bolt"></i>
-                    </div>
-                    <h4 class="text-white font-bold mb-2">AI & Vibe Stack</h4>
-                    <div class="text-apple-subtext text-sm space-y-1">
-                        <p>Cursor / Windsurf</p>
-                        <p>LLM Prompting</p>
-                        <p>Rapid Prototyping</p>
-                    </div>
-                </div>
-
-                <!-- Spec Card 4 -->
-                <div class="spec-card p-6 rounded-2xl fade-in-up delay-400">
-                    <div class="w-10 h-10 bg-red-900/20 rounded-lg flex items-center justify-center mb-4 text-red-400">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <h4 class="text-white font-bold mb-2">Education</h4>
-                    <div class="text-apple-subtext text-sm space-y-1">
-                        <p>MSc Computer Science</p>
-                        <p>Newcastle University</p>
-                    </div>
-                </div>
+        <div class="span-3" data-reveal style="--d: 120ms">
+          <a class="card work" href="onestroke/">
+            <div class="media r-mid"><img src="onestroke/img/card.jpg" alt="OneStroke：網球揮拍者被還原成 3D 人體，揮拍軌跡是一道萊姆綠光帶" width="900" height="908" style="object-position: center 20%" loading="lazy" decoding="async"></div>
+            <div class="work-body">
+              <div class="work-meta"><span class="chip">CASE STUDY · AI</span><svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+              <h3>OneStroke 一拍</h3>
+              <p>用一段手機影片看懂每一拍的網球揮拍分析。0–100 評分、3D 人體還原、像教練一樣診斷；5 天從需求到可試賣。</p>
             </div>
+          </a>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- CTA -->
-    <section id="contact" class="py-32 bg-black text-center relative overflow-hidden">
-        <div class="relative z-10 max-w-2xl mx-auto px-6">
-            <h2 class="text-5xl md:text-7xl font-bold text-white mb-8 tracking-tight fade-in-up">
-                Let's build <br>
-                <span class="text-gradient-blue">the next big thing.</span>
-            </h2>
-            <p class="text-xl text-apple-subtext mb-12 fade-in-up delay-100">
-                Seeking challenges in Web3 & FinTech.
-            </p>
-            
-            <div class="flex flex-col md:flex-row justify-center items-center gap-6 fade-in-up delay-200">
-                <!-- Enhanced Email Button with actual email address -->
-                <a href="mailto:songpu717@gmail.com" class="group relative px-8 py-4 bg-white text-black rounded-full text-lg font-semibold overflow-hidden transition-transform hover:scale-105 cursor-pointer z-30">
-                    <span class="relative z-10 flex items-center gap-2">
-                        <i class="fas fa-envelope text-black"></i>
-                        songpu717@gmail.com
-                    </span>
-                    <div class="absolute inset-0 bg-gray-200 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
-                </a>
-                
-                <a href="tel:0905809887" class="text-white hover:text-apple-accent transition-colors flex items-center gap-2 cursor-pointer z-30">
-                    <i class="fas fa-phone"></i> 0905-809-887
-                </a>
-            </div>
+  <!-- Changelog -->
+  <section class="section" id="changelog">
+    <div class="wrap narrow">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow" data-reveal>CHANGELOG</span>
+          <h2 class="h2" data-split>職涯更新紀錄</h2>
         </div>
-        
-        <div class="mt-32 text-apple-subtext text-sm">
-            <p>&copy; 2026 Aron Song. Designed in Taipei.</p>
+      </div>
+      <div class="log" id="log">
+        <span class="log-rail" aria-hidden="true"></span>
+        <span class="log-fill" aria-hidden="true"></span>
+        <article class="entry" data-reveal="left">
+          <span class="node" aria-hidden="true"></span>
+          <div class="ver"><span class="ver-tag latest">v5.0 · Latest</span><span class="ver-date">2023 — 2025</span></div>
+          <div class="entry-body"><h3>Product Manager <span>· 亞太滿譽科技有限公司</span></h3><p>專注於高槓桿合約交易的核心架構。將複雜的做市策略與風控模型轉化為直觀的用戶產品。</p><div class="tags"><span>Exchange Core</span><span>Risk Control</span></div></div>
+        </article>
+        <article class="entry" data-reveal="left">
+          <span class="node" aria-hidden="true"></span>
+          <div class="ver"><span class="ver-tag">v4.0</span><span class="ver-date">2019 — 2023</span></div>
+          <div class="entry-body"><h3>Web3 Product Lead <span>· 上海分布信息科技</span></h3><p>定義去中心化存儲的標準。從瀏覽器到錢包，構建完整的 Web3 基礎設施生態。</p><div class="tags"><span>DeFi</span><span>Blockchain Browser</span><span>Wallet</span></div></div>
+        </article>
+        <article class="entry" data-reveal="left">
+          <span class="node" aria-hidden="true"></span>
+          <div class="ver"><span class="ver-tag">v3.0</span><span class="ver-date">2018 — 2019</span></div>
+          <div class="entry-body"><h3>Exchange PM <span>· 原始空氣科技</span></h3><p>0 到 1 打造 Bi.top。結合礦業資源與交易平台，實現資源最大化利用。</p><div class="tags"><span>0-to-1</span><span>Mining Pool</span></div></div>
+        </article>
+        <article class="entry" data-reveal="left">
+          <span class="node" aria-hidden="true"></span>
+          <div class="ver"><span class="ver-tag">v2.0</span><span class="ver-date">2016 — 2018</span></div>
+          <div class="entry-body"><h3>AI Healthcare PM <span>· 海納醫信</span></h3><p>將 AI 引入臨床流程。不僅是技術落地，更解決了醫生實際工作流中的痛點。</p><div class="tags"><span>AI Diagnostic</span><span>PACS</span></div></div>
+        </article>
+        <article class="entry" data-reveal="left">
+          <span class="node" aria-hidden="true"></span>
+          <div class="ver"><span class="ver-tag">v1.0 · Origin</span><span class="ver-date">2012 — 2016</span></div>
+          <div class="entry-body"><h3>Software Engineer <span>· 宏元富成 / 四川宏力</span></h3><p>Code is the foundation. 全端開發經驗，奠定了對技術可行性的精準判斷。</p></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stack -->
+  <section class="section" id="stack" style="padding-top: 0">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow" data-reveal>STACK</span>
+          <h2 class="h2" data-split>技術規格</h2>
         </div>
-    </section>
+      </div>
+      <div class="cols-4">
+        <div class="card stack-card" data-reveal style="--d: 0ms">
+          <span class="label">CORE STRATEGY</span>
+          <ul>
+            <li style="--i: 0"><svg class="chk" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>0-1 Product Lifecycle</li>
+            <li style="--i: 1"><svg class="chk" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>Agile / Scrum</li>
+            <li style="--i: 2"><svg class="chk" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>Data-Driven Growth</li>
+          </ul>
+        </div>
+        <div class="card stack-card" data-reveal style="--d: 100ms">
+          <span class="label">WEB3 TECH</span>
+          <ul>
+            <li style="--i: 0"><svg class="chk" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>DeFi / Tokenomics</li>
+            <li style="--i: 1"><svg class="chk" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>Smart Contract Logic</li>
+            <li style="--i: 2"><svg class="chk" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>Wallet Security</li>
+          </ul>
+        </div>
+        <div class="card stack-card" data-reveal style="--d: 200ms">
+          <span class="label">AI &amp; VIBE STACK</span>
+          <ul>
+            <li style="--i: 0"><svg class="chk" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>Cursor / Windsurf</li>
+            <li style="--i: 1"><svg class="chk" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>LLM Prompting</li>
+            <li style="--i: 2"><svg class="chk" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>Rapid Prototyping</li>
+          </ul>
+        </div>
+        <div class="card stack-card" data-reveal style="--d: 300ms">
+          <span class="label">EDUCATION</span>
+          <div class="edu"><b>MSc Computer Science</b><span>Newcastle University</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Fade-in Animation
-            const observerOptions = {
-                root: null,
-                rootMargin: "0px",
-                threshold: 0.1
-            };
+  <!-- Contact -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="contact-card" data-reveal="scale">
+        <span class="eyebrow">CONTACT</span>
+        <h2 class="h2" data-split>Let’s build<br>the next big thing.</h2>
+        <p class="lede">Seeking challenges in Web3 &amp; FinTech.</p>
+        <div class="contact-actions">
+          <a class="btn btn-primary" href="mailto:songpu717@gmail.com" data-magnetic><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>songpu717@gmail.com</a>
+          <a class="btn btn-ghost" href="tel:0905809887" data-magnetic>0905-809-887</a>
+          <a class="btn btn-ghost" href="https://www.cake.me/resumes/songpu717" target="_blank" rel="noopener" data-magnetic>履歷 Resume<svg class="ne" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        </div>
+      </div>
+      <footer>
+        <a class="brand" href="#top">
+          <svg width="22" height="22" viewBox="0 0 32 32" aria-hidden="true"><rect x=".5" y=".5" width="31" height="31" rx="9" fill="#151518" stroke="#2C2C31"/><path class="logo-a" d="M8.5 23 15 9l6.5 14"/><path class="logo-bar" d="M11.6 17.5H25"/></svg>
+          Aron Song
+        </a>
+        <span>© 2026 Aron Song. Designed in Taipei.</span>
+        <nav class="links" aria-label="頁尾導覽"><a href="#work">作品</a><a href="#changelog">更新紀錄</a><a href="#top">回到頂端 ↑</a></nav>
+      </footer>
+    </div>
+  </section>
 
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add("visible");
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, observerOptions);
+</main>
 
-            const elements = document.querySelectorAll(".fade-in-up");
-            elements.forEach(el => observer.observe(el));
-        });
-    </script>
+<script>
+(() => {
+  const root = document.documentElement;
+  const motion = root.classList.contains('motion');
+  const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+  const raf = fn => { let queued = false; return (...a) => { if (queued) return; queued = true; requestAnimationFrame(() => { queued = false; fn(...a); }); }; };
+
+  // ---------- 逐字切分：英文以詞、中文以字（尾隨標點黏在前一字） ----------
+  const TOKEN = /[⺀-鿿豈-﫿＀-￯　-〿][，。、！？：；」』）]*|[^\s⺀-鿿豈-﫿＀-￯　-〿]+/g;
+  function split(el) {
+    let i = 0;
+    const walk = node => {
+      [...node.childNodes].forEach(n => {
+        if (n.nodeType === 3) {
+          const frag = document.createDocumentFragment();
+          n.textContent.split(/(\s+)/).forEach(part => {
+            if (!part) return;
+            if (/^\s+$/.test(part)) { frag.append(part); return; }
+            (part.match(TOKEN) || []).forEach(t => {
+              const w = document.createElement('span');
+              const wi = document.createElement('span');
+              w.className = 'w'; wi.className = 'wi';
+              wi.style.setProperty('--i', i++);
+              wi.textContent = t;
+              w.append(wi); frag.append(w);
+            });
+          });
+          n.replaceWith(frag);
+        } else if (n.nodeType === 1 && n.tagName !== 'BR') walk(n);
+      });
+    };
+    walk(el);
+  }
+
+  // ---------- 數字從 0 跑到目標值 ----------
+  function countUp(el) {
+    const to = +el.dataset.count, dur = 1800, t0 = performance.now();
+    const tick = t => {
+      const k = Math.min(1, (t - t0) / dur);
+      el.textContent = Math.round(to * (k === 1 ? 1 : 1 - Math.pow(2, -10 * k)));
+      if (k < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+
+  // ---------- 打字效果 ----------
+  function type(el) {
+    const text = el.dataset.text;
+    el.textContent = '';
+    let n = 0;
+    const step = () => { el.textContent = text.slice(0, ++n); if (n < text.length) setTimeout(step, 45 + Math.random() * 50); };
+    setTimeout(step, 900);
+  }
+
+  if (motion) {
+    $$('[data-split]').forEach(split);
+    $$('[data-count]').forEach(el => { el.textContent = '0'; });
+
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('in');
+        $$('[data-count]', e.target).forEach(countUp);
+        io.unobserve(e.target);
+      });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: .15 });
+    $$('[data-reveal], [data-split]:not([data-hero])').forEach(el => io.observe(el));
+
+    // 首屏進場：等字型就緒（最多 700ms）再開始，避免換字型時跳動
+    const start = () => {
+      root.classList.add('is-loaded');
+      $$('[data-hero]').forEach(el => el.classList.add('in'));
+      $$('.typing').forEach(type);
+    };
+    Promise.race([document.fonts ? document.fonts.ready : Promise.resolve(), new Promise(r => setTimeout(r, 700))])
+      .then(() => requestAnimationFrame(start));
+  }
+
+  // ---------- 導覽列：滑動的底色膠囊跟著目前區塊 ----------
+  const pill = document.querySelector('.nav-pill');
+  const links = $$('.nav-links a');
+  const sections = links.map(a => document.querySelector(a.getAttribute('href')));
+  let active = -2;
+  const movePill = a => {
+    links.forEach(l => l.classList.toggle('active', l === a));
+    if (!a) { pill.style.opacity = 0; return; }
+    pill.style.opacity = 1;
+    pill.style.width = a.offsetWidth + 'px';
+    pill.style.transform = `translateX(${a.offsetLeft}px)`;
+  };
+  if (document.fonts) document.fonts.ready.then(() => movePill(links[active]));
+
+  // ---------- 捲動：進度條、導覽列狀態、目前區塊、經歷軌道 ----------
+  const bar = document.querySelector('.progress');
+  const nav = document.getElementById('nav');
+  const log = document.getElementById('log');
+  const fill = log.querySelector('.log-fill');
+  const entries = $$('.entry', log);
+  const onScroll = raf(() => {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    bar.style.transform = `scaleX(${max > 0 ? scrollY / max : 0})`;
+    nav.classList.toggle('scrolled', scrollY > 24);
+
+    const mid = innerHeight * .4;
+    const idx = sections.findIndex(s => { const r = s.getBoundingClientRect(); return r.top <= mid && r.bottom > mid; });
+    if (idx !== active) { active = idx; movePill(links[idx]); }
+
+    if (motion) {
+      const r = log.getBoundingClientRect();
+      const p = Math.min(1, Math.max(0, (innerHeight * .62 - r.top) / r.height));
+      fill.style.setProperty('--p', p);
+      entries.forEach(en => en.classList.toggle('lit', en.offsetTop + 40 <= p * r.height));
+    }
+  });
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', onScroll);
+  onScroll();
+
+  if (!motion || !fine) return;
+
+  // ---------- 游標互動（只在桌面滑鼠） ----------
+  // 首屏光暈跟著游標慢慢移動
+  const hero = document.getElementById('hero');
+  const glow = hero.querySelector('.hero-glow');
+  let gx = innerWidth / 2, gy = 260, tx = gx, ty = gy;
+  hero.addEventListener('pointermove', e => { const r = hero.getBoundingClientRect(); tx = e.clientX - r.left; ty = e.clientY - r.top; });
+  (function loop() {
+    gx += (tx - gx) * .08; gy += (ty - gy) * .08;
+    glow.style.transform = `translate(${gx}px, ${gy}px)`;
+    requestAnimationFrame(loop);
+  })();
+
+  // Profile window 隨游標微傾
+  const stage = document.querySelector('.stage');
+  const win = stage.querySelector('.window');
+  stage.addEventListener('pointermove', raf(e => {
+    const r = stage.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+    win.style.setProperty('--rx', `${(-y * 6).toFixed(2)}deg`);
+    win.style.setProperty('--ry', `${(x * 8).toFixed(2)}deg`);
+  }));
+  stage.addEventListener('pointerleave', () => { win.style.setProperty('--rx', '0deg'); win.style.setProperty('--ry', '0deg'); });
+
+  // 卡片聚光：記錄游標在卡片內的位置
+  $$('.card').forEach(card => card.addEventListener('pointermove', e => {
+    const r = card.getBoundingClientRect();
+    card.style.setProperty('--mx', `${e.clientX - r.left}px`);
+    card.style.setProperty('--my', `${e.clientY - r.top}px`);
+  }));
+
+  // 磁吸按鈕
+  $$('[data-magnetic]').forEach(btn => {
+    btn.addEventListener('pointermove', e => {
+      const r = btn.getBoundingClientRect();
+      const dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height / 2);
+      btn.style.transform = `translate(${dx * .22}px, ${dy * .35}px)`;
+    });
+    btn.addEventListener('pointerleave', () => { btn.style.transform = ''; });
+  });
+})();
+</script>
 </body>
 </html>
