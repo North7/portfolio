@@ -208,10 +208,10 @@ a.card:hover { transform: translateY(-4px); box-shadow: 0 30px 60px -30px rgba(0
 .bento-label { grid-column: 1 / -1; display: flex; align-items: center; gap: 16px; margin-top: 28px; font: 500 12px/1 var(--mono); letter-spacing: .14em; color: var(--text-3); }
 .bento-label:first-child { margin-top: 0; }
 .bento-label::after { content: ""; flex: 1; height: 1px; background: var(--border); }
-.work.feature { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 36px; align-items: center; }
-.work.feature .work-body { padding: 12px 0 12px 16px; gap: 14px; }
-.work.feature h3 { font-size: clamp(28px, 3vw, 40px); letter-spacing: -.04em; }
-.work.feature p { font-size: 16px; }
+.work.lead { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 36px; align-items: center; }
+.work.lead .work-body { padding: 12px 0 12px 16px; gap: 14px; }
+.work.lead h3 { font-size: clamp(28px, 3vw, 40px); letter-spacing: -.04em; }
+.work.lead p { font-size: 16px; }
 .r-feature img { aspect-ratio: 16 / 10; }
 .chip.new { border-color: rgba(var(--accent-rgb), .6); color: var(--accent); }
 .work { display: flex; flex-direction: column; gap: 22px; padding: 20px; }
@@ -287,9 +287,9 @@ footer .links a:hover { color: var(--text); }
   .window-photo { min-height: 0; }
   .window-photo img { aspect-ratio: 4 / 3; }
   .span-2, .span-3, .span-4, .span-6 { grid-column: auto; }
-  .work.feature { grid-template-columns: minmax(0, 1fr); gap: 22px; }
-  .work.feature .media { order: -1; }
-  .work.feature .work-body { padding: 0 6px 6px; }
+  .work.lead { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+  .work.lead .media { order: -1; }
+  .work.lead .work-body { padding: 0 6px 6px; }
   .r-tall img { aspect-ratio: 16 / 10; }
   .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .metric:nth-child(3) { border-left: 0; }
@@ -427,12 +427,12 @@ footer .links a:hover { color: var(--text); }
       <div class="bento">
         <div class="bento-label" data-reveal>最新個人產品 · LATEST</div>
         <div class="span-6" data-reveal style="--d: 0ms">
-          <a class="card work feature" href="onestroke/">
+          <a class="card work lead" href="onestroke/">
             <div class="work-body">
               <div class="work-meta"><span class="chip new">NEW · CASE STUDY · AI</span><svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
               <h3>OneStroke 一拍</h3>
-              <p>用一段手機影片看懂每一拍的網球揮拍分析產品。自動切出每一拍、0–100 評分、3D 人體還原、像教練一樣診斷並給練習方案。</p>
-              <div class="kpis"><span><b>5 天</b> 需求到可試賣</span><span><b>0–100</b> 揮拍評分</span><span><b>3D</b> 人體還原</span></div>
+              <p>用一段手機影片看懂每一拍的網球揮拍分析產品。自動切出每一拍、0–100 評分、3D 人體還原、像教練一樣診斷並給練習方案；從定義問題到可試賣的版本。</p>
+              <div class="kpis"><span><b>0–100</b> 揮拍評分</span><span><b>3D</b> 人體還原</span><span><b>教練式</b> 診斷與練習方案</span></div>
             </div>
             <div class="media r-feature"><img src="onestroke/img/card.jpg" alt="OneStroke：網球揮拍者被還原成 3D 人體，揮拍軌跡是一道萊姆綠光帶" width="900" height="908" style="object-position: center 22%" loading="lazy" decoding="async"></div>
           </a>

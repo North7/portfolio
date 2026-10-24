@@ -216,10 +216,10 @@ nav.toc a.who:hover { color: var(--fg); }
   <div class="txt">
     <div class="eyebrow">Case study · OneStroke 一拍</div>
     <h1 id="t">用手機影片<br>看懂<em>每一拍</em>的網球分析產品</h1>
-    <p class="lede">我在球機場自主練球，市面的分析工具給了分數，卻說不出差在哪、下一步練什麼。我用 5 天把這個困擾做成一個可以拿去試賣的產品：上傳一段練習影片，自動切出每一拍、打分數、像教練一樣診斷，再把人還原成 3D。</p>
+    <p class="lede">我在球機場自主練球，市面的分析工具給了分數，卻說不出差在哪、下一步練什麼。我把這個困擾做成一個可以拿去試賣的產品：上傳一段練習影片，自動切出每一拍、打分數、像教練一樣診斷，再把人還原成 3D。</p>
     <dl class="meta">
       <div><dt>角色</dt><dd>產品負責人（定義、研究、驗證、設計決策）</dd></div>
-      <div><dt>期間</dt><dd>2026/10/20 – 10/24</dd></div>
+      <div><dt>階段</dt><dd>可試賣的 MVP</dd></div>
       <div><dt>團隊</dt><dd>我＋AI 編碼代理（Claude Code）</dd></div>
       <div><dt>形態</dt><dd>手機網頁＋本機運算，PDF 報告與分享影片</dd></div>
     </dl>
@@ -228,7 +228,7 @@ nav.toc a.who:hover { color: var(--fg); }
 </section>
 
 <div class="nums" role="list">
-  <div role="listitem"><b>5 天</b><span>從需求到可試賣的版本</span></div>
+  <div role="listitem"><b>0 元</b><span>每場的運算成本，影片不離開自己的電腦</span></div>
   <div role="listitem"><b>107</b><span>次提交，每一步都能單獨驗收</span></div>
   <div role="listitem"><b>13</b><span>版評分模型，歷史紀錄一鍵重算</span></div>
   <div role="listitem"><b>158 拍</b><span>8 分半影片自動切出，本人逐拍確認</span></div>
@@ -262,7 +262,7 @@ nav.toc a.who:hover { color: var(--fg); }
     <div class="card"><h3>主要使用者：自主練球的業餘球員</h3>
       <p class="muted">室內球機場、一個人打、手機固定在場邊。一次練 10 分鐘左右、100 拍以上。想知道今天哪裡打得好、哪裡要改、下次練什麼。</p></div>
     <div class="card"><h3>延伸使用者：帶學員的教練</h3>
-      <p class="muted">要分開管理每位學員的資料、給學員只看得到自己的連結，並交出一份正式的報告。這在第 5 天加入，作為之後帳號系統的基礎。</p></div>
+      <p class="muted">要分開管理每位學員的資料、給學員只看得到自己的連結，並交出一份正式的報告。這是核心流程驗證過之後才加進來的，作為之後帳號系統的基礎。</p></div>
   </div>
 </section>
 
@@ -363,34 +363,34 @@ nav.toc a.who:hover { color: var(--fg); }
   <div class="eyebrow">Decision log</div>
   <h2 id="h-decisions">七個關鍵取捨</h2>
   <div class="decs">
-    <article class="dec"><div class="when">10/20<h3>3D 人體要用哪個模型</h3></div><dl>
+    <article class="dec"><div class="when">決策 01<h3>3D 人體要用哪個模型</h3></div><dl>
       <dt>情境</dt><dd>要量轉肩、手臂旋轉，2D 不夠；但準確度最好的幾個模型都是 SMPL 系，授權不能商用。</dd>
       <dt>選項</dt><dd><span class="chip">WHAM / GVHMR（SMPL）</span><span class="chip">SAM 3D Body</span><span class="chip">只用 2D</span></dd>
       <dt>決定</dt><dd>3D 用 Meta 的 SAM 3D Body，2D 用 Apache-2.0 的 RTMPose 與 MediaPipe；把商用前仍需律師確認的條款列成清單。</dd>
       <dt>結果</dt><dd class="out">保住商業化的路，同時拿到手臂旋轉、腕部這些 2D 量不到的指標。</dd></dl></article>
-    <article class="dec"><div class="when">10/20<h3>2D 量不準的指標怎麼辦</h3></div><dl>
+    <article class="dec"><div class="when">決策 02<h3>2D 量不準的指標怎麼辦</h3></div><dl>
       <dt>情境</dt><dd>做了兩個姿態模型互相比對的資料稽核，發現髖肩分離角在 2D 下兩個模型對不起來。</dd>
       <dt>決定</dt><dd>把它移出計分，只當參考；之後每個指標依拍攝角度標「可信／參考／不可信」。</dd>
       <dt>結果</dt><dd class="out">寧可少一項分數，也不給使用者錯的數字；後來支援正面、背後等角度時，這張可信度表直接沿用。</dd></dl></article>
-    <article class="dec"><div class="when">10/21<h3>3D 太慢，要不要上雲端</h3></div><dl>
+    <article class="dec"><div class="when">決策 03<h3>3D 太慢，要不要上雲端</h3></div><dl>
       <dt>情境</dt><dd>SAM 3D 在 Mac 上每拍 13–25 秒，一場 150 拍要 40 分鐘以上；雲端 GPU 的成本還沒實測。</dd>
       <dt>選項</dt><dd><span class="chip">全部上雲端</span><span class="chip">全部本機</span><span class="chip">關鍵幀＋插值，只跑關鍵的拍</span></dd>
       <dt>決定</dt><dd>只算關鍵幀再插值；上傳後自動挑 5 拍（本場最佳、典型、方案的目標拍與問題拍、待改進），其他拍按需補跑，並記下每次用量。</dd>
       <dt>結果</dt><dd class="out">每場的 3D 從 40 分鐘以上降到約 2 分鐘；用量紀錄直接成為「基本 5 拍、全場加購」收費方案的計費依據。</dd></dl></article>
-    <article class="dec"><div class="when">10/21<h3>沒有 3D 時，骨架常把手腳前後弄反</h3></div><dl>
+    <article class="dec"><div class="when">決策 04<h3>沒有 3D 時，骨架常把手腳前後弄反</h3></div><dl>
       <dt>情境</dt><dd>2D 只看得到平面，四肢前後顛倒的比例在不同角度有 11–28%。</dd>
       <dt>決定</dt><dd>用 SAM 3D 的結果當老師，訓練一個只吃 2D 的小模型判斷前後，混合進原本的骨架；同時確認 SAM 授權沒有禁止用輸出訓練。</dd>
       <dt>結果</dt><dd class="out">顛倒率降到正面 2%、右後 3%、側面 9%、背後 14%，而且不用多付 3D 的運算成本。</dd></dl></article>
-    <article class="dec"><div class="when">10/22<h3>分享影片要長什麼樣子</h3></div><dl>
+    <article class="dec"><div class="when">決策 05<h3>分享影片要長什麼樣子</h3></div><dl>
       <dt>情境</dt><dd>使用者想把好球分享出去，這也是最便宜的獲客管道；需求是「要高級、能病毒傳播、展示厲害的東西」。</dd>
       <dt>決定</dt><dd>預設樣式做成「3D 子彈時間」：原片播一次 → 擊球瞬間定格 → 本人變成 3D 雕塑繞一圈 → 回原片收拍；片尾品牌畫面固定、不能關。</dd>
       <dt>結果</dt><dd class="out">每一支分享影片都是一則產品示範；之後的「最佳 vs 典型」對比影片也沿用同一套 3D 舞台。</dd></dl></article>
-    <article class="dec"><div class="when">10/23<h3>要不要在手機端先壓縮再上傳</h3></div><dl>
+    <article class="dec"><div class="when">決策 06<h3>要不要在手機端先壓縮再上傳</h3></div><dl>
       <dt>情境</dt><dd>一場原片約 580 MB，手機上傳很慢。</dd>
       <dt>實驗</dt><dd>手機端先切片：仍要上傳 79–84%，不划算。壓成 720p 2Mbps：大小降到 1/4，拍數、正反手幾乎一樣，但壓縮雜訊讓速度類指標偏高 3–17%。</dd>
       <dt>決定</dt><dd>先不上線。偏高的數字混進歷史紀錄，會讓使用者誤以為自己進步了；等決定好歷史資料怎麼銜接再做。</dd>
       <dt>結果</dt><dd class="out">把一個看起來簡單的優化，變成一份有數據的取捨紀錄，避免傷到最核心的「趨勢可信」。</dd></dl></article>
-    <article class="dec"><div class="when">10/24<h3>要給學員用，資料要怎麼分</h3></div><dl>
+    <article class="dec"><div class="when">決策 07<h3>要給學員用，資料要怎麼分</h3></div><dl>
       <dt>情境</dt><dd>準備找球友試用，之後可能要做帳號系統。</dd>
       <dt>選項</dt><dd><span class="chip">在現有資料上加標記</span><span class="chip">每位球員一個資料夾＋路徑層</span></dd>
       <dt>決定</dt><dd>做最徹底的版本：所有路徑集中到一層，每位球員各自的設定、基線、趨勢與首頁；學員有專屬連結，只看得到、只能上傳自己的資料；刪除先進回收區，30 天內可復原。</dd>
@@ -474,7 +474,7 @@ nav.toc a.who:hover { color: var(--fg); }
 <section id="method" aria-labelledby="h-method">
   <div class="eyebrow">How I worked</div>
   <h2 id="h-method">我跟 AI 怎麼分工</h2>
-  <p>程式由 AI 編碼代理實作，我負責「做對的東西」：定義問題、訂驗收標準、在選項之間做決定，並且審查每一個結果。讓這件事在 5 天內可行的，是幾條工作規則：</p>
+  <p>程式由 AI 編碼代理實作，我負責「做對的東西」：定義問題、訂驗收標準、在選項之間做決定，並且審查每一個結果。讓這件事能穩定推進、不走偏的，是幾條工作規則：</p>
   <div class="two">
     <div class="card"><h3>規則</h3><ul class="plain">
       <li>開發順序拆成可以單獨驗收的步驟：切片 → 2D 指標與評分 → 3D → 分析與趨勢</li>
