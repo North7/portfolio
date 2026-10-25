@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>履歷 · Aron Song 宋璞</title>
+<meta name="description" content="宋璞 Aron Song 履歷：13 年產品與工程經驗（11 年產品管理），橫跨 Web3 金融科技與 AI 醫療；2026 年用 AI 協作獨立做出 7 件個人產品。">
+<meta name="theme-color" content="#0A0A0B">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="履歷 · Aron Song 宋璞">
+<meta property="og:description" content="13 年產品與工程經驗（11 年產品管理），橫跨 Web3 金融科技與 AI 醫療。">
+<meta property="og:url" content="https://north7.github.io/portfolio/resume/">
+<meta property="og:image" content="https://north7.github.io/portfolio/img/portrait.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='.5' y='.5' width='31' height='31' rx='9' fill='%23151518' stroke='%232C2C31'/%3E%3Cpath d='M8.5 23 15 9l6.5 14' fill='none' stroke='%23EDEDEF' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M11.6 17.5H25' stroke='%238B7CFF' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;700&display=swap">
+<script>
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('motion');
+</script>
+<style>
+/* 履歷：沿用作品集的 Obsidian 色票，單欄好讀；列印時自動換成白底黑字的 A4 版面 */
+:root {
+  --bg: #0A0A0B;
+  --surface: #111113;
+  --surface-2: #17171A;
+  --border: #232327;
+  --line: #1D1D21;
+  --text: #EDEDEF;
+  --text-2: #A1A1AA;
+  --text-3: #8A8A93;
+  --accent: #8B7CFF;
+  --green: #3DDC97;
+  --sans: "Geist", "Noto Sans TC", system-ui, -apple-system, "PingFang TC", sans-serif;
+  --mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --ease: cubic-bezier(.22, 1, .36, 1);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 400 15px/1.75 var(--sans); -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+h1, h2, h3, p, ul { margin: 0; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+::selection { background: var(--accent); color: var(--bg); }
+
+.wrap { max-width: 880px; margin: 0 auto; padding: 32px max(16px, env(safe-area-inset-left, 0px)) 96px; }
+.toolbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 48px; }
+.back { display: inline-flex; align-items: center; gap: 10px; font-size: 14px; color: var(--text-2); transition: color .25s; }
+.back:hover { color: var(--text); }
+.btn { display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 16px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); color: var(--text); font: 500 14px var(--sans); cursor: pointer; transition: border-color .25s, background .25s; }
+.btn:hover { border-color: #3A3A41; background: var(--surface-2); }
+
+header.top { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 28px; align-items: end; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
+.name { font-size: clamp(36px, 6vw, 56px); font-weight: 600; letter-spacing: -.04em; line-height: 1.05; }
+.name span { color: var(--text-3); font-weight: 500; }
+.role { margin-top: 10px; font-size: 17px; color: var(--text-2); }
+.summary { margin-top: 20px; padding: 0; list-style: none; display: grid; gap: 6px; }
+.summary li { display: flex; gap: 10px; }
+.summary li::before { content: ""; flex: none; width: 6px; height: 6px; margin-top: 11px; border-radius: 50%; background: var(--accent); }
+.contact { display: grid; gap: 6px; font: 400 13px/1.6 var(--mono); color: var(--text-2); text-align: right; }
+.contact a:hover { color: var(--text); }
+.portrait { width: 112px; height: 112px; border-radius: 16px; object-fit: cover; border: 1px solid var(--border); margin-left: auto; margin-bottom: 14px; display: block; }
+
+section { margin-top: 48px; }
+.eyebrow { display: flex; align-items: center; gap: 14px; font: 500 12px/1 var(--mono); letter-spacing: .14em; color: var(--accent); margin-bottom: 8px; }
+.eyebrow::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+
+.job { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 24px; padding: 22px 0; border-bottom: 1px solid var(--line); break-inside: avoid; }
+.job:last-child { border-bottom: 0; }
+.when { font: 400 13px/1.9 var(--mono); color: var(--text-3); }
+.when b { display: block; font-weight: 500; color: var(--text); }
+.job h3 { font-size: 17px; font-weight: 600; letter-spacing: -.01em; }
+.job h3 span { font-weight: 400; color: var(--text-2); }
+.job .lead { margin-top: 4px; font-size: 14px; color: var(--text-3); }
+.job ul { margin-top: 10px; padding-left: 18px; display: grid; gap: 6px; color: var(--text-2); }
+.job li::marker { color: var(--accent); }
+.job li b { color: var(--text); font-weight: 500; }
+
+.edu { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 24px; padding: 18px 0; }
+.skills { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
+.skill { padding: 16px 18px; border: 1px solid var(--border); border-radius: 14px; background: var(--surface); break-inside: avoid; }
+.skill h3 { font: 500 12px/1 var(--mono); letter-spacing: .1em; color: var(--text-3); margin-bottom: 10px; }
+.skill p { font-size: 14px; color: var(--text); }
+
+footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 13px; color: var(--text-3); }
+
+/* 進場：區塊依序淡入 */
+.motion .rise { opacity: 0; transform: translateY(16px); transition: opacity .8s var(--ease), transform .8s var(--ease); transition-delay: var(--d, 0ms); }
+.motion.ready .rise { opacity: 1; transform: none; }
+
+@media (max-width: 680px) {
+  header.top { grid-template-columns: minmax(0, 1fr); }
+  .contact { text-align: left; }
+  .portrait { margin-left: 0; }
+  .job, .edu { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  .skills { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media print {
+  @page { size: A4; margin: 14mm 14mm 16mm; }
+  :root { --bg: #FFFFFF; --surface: #FFFFFF; --surface-2: #FFFFFF; --border: #D9D9DE; --line: #E6E6EA; --text: #111113; --text-2: #3A3A40; --text-3: #6A6A72; --accent: #5B4BE0; color-scheme: light; }
+  body { font-size: 9.6pt; line-height: 1.5; }
+  .wrap { max-width: none; padding: 0; }
+  .toolbar, footer .no-print { display: none; }
+  .motion .rise { opacity: 1; transform: none; }
+  header.top { padding-bottom: 16px; }
+  .summary { margin-top: 10px; gap: 2px; }
+  .summary li::before { margin-top: 8px; }
+  section { margin-top: 16px; }
+  .job, .edu { grid-template-columns: 104px minmax(0, 1fr); gap: 16px; padding: 9px 0; }
+  .job h3 { font-size: 11pt; }
+  .job .lead { margin-top: 0; font-size: 9pt; }
+  .job ul { margin-top: 4px; gap: 1px; }
+  .when { font-size: 8.5pt; line-height: 1.7; }
+  .skills { gap: 8px; margin-top: 8px; }
+  .skill { padding: 9px 12px; }
+  .skill h3 { margin-bottom: 4px; }
+  footer { margin-top: 18px; padding-top: 10px; }
+  .name { font-size: 24pt; }
+  .role { margin-top: 4px; font-size: 11pt; }
+  .portrait { width: 68px; height: 68px; margin-bottom: 8px; border-radius: 12px; }
+  a { text-decoration: none; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="toolbar rise">
+    <a class="back" href="../">← 回到作品集</a>
+    <button class="btn" type="button" onclick="window.print()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-2"/><path d="M6 14h12v7H6z"/></svg>列印 / 存成 PDF</button>
+  </div>
+
+  <header class="top rise" style="--d: 80ms">
+    <div>
+      <h1 class="name">宋璞 <span>Aron Song</span></h1>
+      <p class="role">產品經理 · Product Architect · Web3 金融科技 × AI</p>
+      <ul class="summary">
+        <li>13 年產品與工程經驗：11 年產品管理，加上軟體工程背景</li>
+        <li>多項 0 → 1 創新專案，經手產品累積 $10B+ 交易額</li>
+        <li>2026 年用 AI 協作獨立做出 7 件個人產品，5 件每天自動更新</li>
+      </ul>
+    </div>
+    <div>
+      <img class="portrait" src="../img/portrait.jpg" alt="宋璞 Aron Song 的肖像" width="1254" height="1254">
+      <div class="contact">
+        <span>Taipei, Taiwan</span>
+        <a href="mailto:songpu717@hotmail.com">songpu717@hotmail.com</a>
+        <a href="tel:0905809887">0905-809-887</a>
+        <a href="https://north7.github.io/portfolio/">north7.github.io/portfolio</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="rise" style="--d: 160ms" aria-labelledby="exp">
+    <h2 class="eyebrow" id="exp">工作經歷 · EXPERIENCE</h2>
+
+    <article class="job">
+      <div class="when"><b>2026 — 現在</b>獨立</div>
+      <div>
+        <h3>獨立產品開發 <span>· Aron Lab</span></h3>
+        <p class="lead">個人產品實驗室：north7.github.io</p>
+        <ul>
+          <li>用 AI 協作（Claude Code）一個人從定義問題做到上線：<b>7 件個人產品、5 件每天自動更新</b>。</li>
+          <li><b>Tidemark</b>：把 17 項公開指標與減半週期濃縮成頂部／底部兩個訊號；評估 48 個候選指標、700+ 次回測，附逐輪回測的週期策略。</li>
+          <li><b>Daybreak 破曉</b>：15 個免費資料源，每天台北 08:30 出刊的比特幣簡報；程式算數字、AI 只寫判讀，資料與主機成本 $0。</li>
+          <li><b>OneStroke 一拍</b>：用一段手機影片分析網球揮拍，0–100 評分、3D 人體還原、教練式診斷與練習方案。</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="job">
+      <div class="when"><b>2023.09 — 2025</b></div>
+      <div>
+        <h3>產品經理 <span>· 亞太滿譽科技有限公司</span></h3>
+        <p class="lead">Top.one 高槓桿加密貨幣合約交易平台</p>
+        <ul>
+          <li>規劃並主導交易與資產核心模組：撮合引擎、訂單邏輯、錢包系統與做市策略。</li>
+          <li>設計動態市場深度模型與槓桿風控邏輯（<b>最高 1000 倍</b>），實施智能做市機器人與自動化策略。</li>
+          <li>建立多層次高風險用戶行為預防與即時風控預警；整合<b>三大交易所價格加權</b>，解決單一市場報價異常。</li>
+          <li>規劃多維利潤模型（交易量、資金費、清算收益）；以 Scrum 每週迭代、數據驅動交付。</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="job">
+      <div class="when"><b>2019.02 — 2023.05</b>北京</div>
+      <div>
+        <h3>產品經理 <span>· 上海分布信息科技有限公司北京分公司</span></h3>
+        <p class="lead">分布式存儲生態產品</p>
+        <ul>
+          <li><b>Seeker 分布式瀏覽器</b>：基於自研分布式存儲公鏈，規劃 DApp 瀏覽器、身份管理、加密錢包（主流資產與 NFT）、文件存儲、鏈上查詢與插件擴展；支援 Windows、Mac、iOS、Android。</li>
+          <li>主導區塊鏈瀏覽器與節點管理工具，提升合約管理透明度與節點操作效率。</li>
+          <li>領導代幣經濟模型設計（分配機制、分發速率與盈利策略）；制定品牌增長策略、官網與白皮書內容。</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="job">
+      <div class="when"><b>2018.05 — 2019.02</b>北京</div>
+      <div>
+        <h3>產品經理 <span>· 原始空氣（北京）科技有限公司</span></h3>
+        <p class="lead">Bi.top 數字貨幣交易平台（已停運）</p>
+        <ul>
+          <li>全面管理交易所 Web、iOS 與 Android 平台，從市場定位、產品設計到生命週期，<b>完成 0 到 1 落地</b>。</li>
+          <li>主導 2.0 版本，<b>上線後 3 個月內完成升級</b>；建立數據驅動決策機制，協助營運與行銷提升留存。</li>
+          <li>設計量化交易策略與做市機器人；協調市場、法遵、客服等跨部門對接。</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="job">
+      <div class="when"><b>2016.06 — 2018.05</b>北京</div>
+      <div>
+        <h3>產品經理兼設計部門經理 <span>· 海納醫信（北京）軟件科技</span></h3>
+        <p class="lead">AI 一體化醫療影像平台</p>
+        <ul>
+          <li>主導 AI PACS 模組：醫師需求訪談、場景分析、功能定義與原型驗證，整合 AI 診斷、3D 影像 VR 與遠距會診。</li>
+          <li><b>半年內 MVP 上線並獲三家大型醫院採用</b>；診斷流程速度提升數十倍，肺結節偵測準確率達中高階醫師水準。</li>
+          <li>行動版眼科 PACS：支援診間、病房、手術室即時影像調閱與標註，<b>平均診療時間縮短逾 50%</b>，納入集團標準配置。</li>
+          <li>領導 UI/UX 團隊，優化設計流程與產品體驗。</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="job">
+      <div class="when"><b>2014.12 — 2016.05</b></div>
+      <div>
+        <h3>產品經理兼開發 <span>· 四川宏力科技有限公司</span></h3>
+        <p class="lead">拉貨寶（4 人初創團隊）</p>
+        <ul>
+          <li>帶領產品從 0 到 1：用戶行為分析、業務流程設計與原型開發。</li>
+          <li>設計並實作前端架構與核心模組（交易、商品發布、專線商鋪管理）；多次改版後<b>被母公司收購</b>。</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="job">
+      <div class="when"><b>2012.02 — 2014.12</b>美國總公司</div>
+      <div>
+        <h3>軟體開發工程師 <span>· 宏元富成科技有限公司</span></h3>
+        <p class="lead">SchoolStream Application</p>
+        <ul>
+          <li>主要設計與開發人員，與美國市場部協作完成需求分析與產品規劃。</li>
+          <li>負責核心功能開發、排程與 ROI 評估；管理測試、品質控制與多環境部署。</li>
+        </ul>
+      </div>
+    </article>
+  </section>
+
+  <section class="rise" style="--d: 240ms" aria-labelledby="edu">
+    <h2 class="eyebrow" id="edu">學歷 · EDUCATION</h2>
+    <div class="edu">
+      <div class="when"><b>2010 — 2011</b>英國</div>
+      <div><h3 style="font-size: 17px; font-weight: 600">MSc Computer Science <span style="font-weight: 400; color: var(--text-2)">· Newcastle University</span></h3></div>
+    </div>
+  </section>
+
+  <section class="rise" style="--d: 320ms" aria-labelledby="skills">
+    <h2 class="eyebrow" id="skills">專業技能 · SKILLS</h2>
+    <div class="skills">
+      <div class="skill"><h3>產品管理與策略</h3><p>產品策略｜需求分析與優先排序｜0 → 1 產品生命週期｜敏捷開發（Scrum）｜數據驅動決策</p></div>
+      <div class="skill"><h3>WEB3 與金融科技</h3><p>合約交易與風控｜做市與量化策略｜DeFi / Tokenomics｜錢包安全</p></div>
+      <div class="skill"><h3>用戶體驗與團隊</h3><p>用戶研究｜UX 優化｜跨平台產品設計｜設計團隊管理｜跨時區協作</p></div>
+      <div class="skill"><h3>AI 協作開發</h3><p>Claude Code｜規則文件與自動檢查｜快速原型</p></div>
+      <div class="skill"><h3>工具</h3><p>Axure、Figma、Jira、Trello、Asana、Xmind、Lark</p></div>
+      <div class="skill"><h3>語言</h3><p>中文（母語）、英文 · MBTI INTJ-A</p></div>
+    </div>
+  </section>
+
+  <footer>
+    <span>宋璞 Aron Song · 更新於 2026 年 10 月</span>
+    <a class="no-print" href="../">作品集 north7.github.io/portfolio →</a>
+  </footer>
+
+</div>
+<script>
+  if (document.documentElement.classList.contains('motion')) requestAnimationFrame(() => document.documentElement.classList.add('ready'));
+</script>
+</body>
+</html>
