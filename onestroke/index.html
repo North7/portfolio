@@ -3,6 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="canonical" href="https://portfolio.aronlab.dev/onestroke/">
+<script>
+  // 同一份網站也部署在 GitHub Pages；從舊網址進來的訪客轉到正式網域，路徑保留
+  if (location.hostname === 'north7.github.io') location.replace('https://portfolio.aronlab.dev' + location.pathname.replace(/^\/portfolio/, '') + location.search + location.hash);
+</script>
 <meta name="description" content="用一段手機影片看懂每一拍的網球揮拍分析產品：問題、原則、架構、決策紀錄、驗證與實際畫面。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OneStroke 一拍｜產品案例 · Aron">
