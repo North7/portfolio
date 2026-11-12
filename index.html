@@ -100,7 +100,7 @@ p, h1, h2, h3 { margin: 0; }
 .numbers .wrap { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .num { padding: 44px 0; }
 .num b { display: block; font-size: clamp(48px, 5.4vw, 80px); font-weight: 900; letter-spacing: -.05em; line-height: 1; font-variant-numeric: tabular-nums; }
-.num span { font-family: var(--tc); font-size: 14px; color: var(--muted); }
+.num > span { font-family: var(--tc); font-size: 14px; color: var(--muted); }
 
 /* 章節 */
 .chapter { padding-top: 120px; }
@@ -141,7 +141,7 @@ p, h1, h2, h3 { margin: 0; }
 .grid4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
 .tile { display: flex; flex-direction: column; gap: 10px; }
 .tile .frame { overflow: hidden; border-radius: 12px; }
-.tile img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; transition: transform 1.1s var(--ease); }
+.tile img { width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; transition: transform 1.1s var(--ease); }
 .before .tile img { aspect-ratio: 4 / 3; }
 a.tile:hover img { transform: scale(1.05); }
 .tile .yr { font-size: 12px; letter-spacing: .2em; color: var(--muted); }
